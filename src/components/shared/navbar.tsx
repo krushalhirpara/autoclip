@@ -164,6 +164,14 @@ export function Navbar() {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
+        // Clean up hash when scrolling back to top
+        if (window.location.pathname === "/" && window.location.hash) {
+          window.history.replaceState(
+            null,
+            "",
+            window.location.pathname + window.location.search
+          );
+        }
       }
     };
 
@@ -270,6 +278,13 @@ export function Navbar() {
                 if (window.location.pathname === "/") {
                   e.preventDefault();
                   window.scrollTo({ top: 0, behavior: "smooth" });
+                  if (window.location.hash) {
+                    window.history.pushState(
+                      null,
+                      "",
+                      window.location.pathname + window.location.search
+                    );
+                  }
                 }
               }}
               className="group flex items-center space-x-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C5CFC]"
