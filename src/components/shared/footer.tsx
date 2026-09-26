@@ -7,7 +7,7 @@ import { Scissors, ShieldCheck, Heart, ExternalLink } from "lucide-react";
 
 export function Footer() {
   const pathname = usePathname();
-  const isAuthPage = pathname === "/login" || pathname === "/signup";
+  const isAuthPage = pathname === "/login" || pathname === "/signup" || pathname === "/forgot-password";
 
   if (isAuthPage) {
     return (

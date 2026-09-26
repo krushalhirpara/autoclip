@@ -29,14 +29,7 @@ export async function GET(
     googleAuthUrl.searchParams.set("access_type", "offline");
     
     return NextResponse.redirect(googleAuthUrl);
-  } else if (provider === "facebook") {
-    const facebookAuthUrl = new URL("https://www.facebook.com/v19.0/dialog/oauth");
-    facebookAuthUrl.searchParams.set("client_id", process.env.FACEBOOK_CLIENT_ID || "");
-    facebookAuthUrl.searchParams.set("redirect_uri", redirectUri);
-    facebookAuthUrl.searchParams.set("state", state);
-    facebookAuthUrl.searchParams.set("scope", "email,public_profile");
-    
-    return NextResponse.redirect(facebookAuthUrl);
+
   } else if (provider === "apple") {
     const appleAuthUrl = new URL("https://appleid.apple.com/auth/authorize");
     appleAuthUrl.searchParams.set("client_id", process.env.APPLE_CLIENT_ID || "");

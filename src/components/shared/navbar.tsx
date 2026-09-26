@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Scissors,
   ArrowRight,
@@ -132,6 +133,9 @@ const RESOURCES_ITEMS: DropdownItem[] = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
+  const isAuthPage = pathname === "/login" || pathname === "/signup" || pathname === "/forgot-password";
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -237,6 +241,35 @@ export function Navbar() {
           i.category.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : allSearchableItems.slice(0, 6);
+
+  if (isAuthPage) {
+    return (
+      <header className="sticky top-0 z-40 w-full border-b border-gray-200/60 bg-white/90 backdrop-blur-md dark:border-white/10 dark:bg-[#09090B]/90 transition-colors">
+        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
+          <Link
+            href="/"
+            className="group flex items-center space-x-2.5 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C5CFC]"
+            aria-label="AutoClipp Home"
+          >
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#7C5CFC] to-[#9B7CFF] shadow-[0_0_16px_rgba(124,92,252,0.35)] transition-all duration-200 group-hover:scale-105">
+              <Scissors className="h-5 w-5 text-white transition-transform group-hover:rotate-12" />
+            </div>
+            <span className="text-xl font-bold tracking-tight text-[#111118] dark:text-white">
+              Auto<span className="text-[#7C5CFC] dark:text-[#A78BFA]">Clipp</span>
+            </span>
+          </Link>
+
+          <Link
+            href="/"
+            className="flex items-center gap-1.5 text-xs font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors"
+          >
+            <span>Back to Home</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className="sticky top-0 z-40 w-full transition-all duration-300">

@@ -63,33 +63,7 @@ export async function GET(
         image: profile.picture,
         provider: "google",
       };
-    } else if (provider === "facebook") {
-      const tokenResponse = await fetch("https://graph.facebook.com/v19.0/oauth/access_token", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          client_id: process.env.FACEBOOK_CLIENT_ID || "",
-          client_secret: process.env.FACEBOOK_CLIENT_SECRET || "",
-          code,
-          redirect_uri: redirectUri,
-        }),
-      });
-      const tokens = await tokenResponse.json();
-      
-      if (!tokens.access_token) {
-        throw new Error("Failed to get access token");
-      }
 
-      const userResponse = await fetch(`https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${tokens.access_token}`);
-      const profile = await userResponse.json();
-
-      userInfo = {
-        id: profile.id,
-        email: profile.email || `${profile.id}@facebook.local`,
-        name: profile.name,
-        image: profile.picture?.data?.url,
-        provider: "facebook",
-      };
     } else if (provider === "apple") {
       // For a real production app, Apple requires generating a JWT client_secret
       // using p8 certificates. We will use a simplified flow here or error out if not configured.
