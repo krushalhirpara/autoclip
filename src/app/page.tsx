@@ -25,6 +25,9 @@ import { DemoSmartReframe } from "@/components/marketing/DemoSmartReframe";
 import { DemoAICaptions } from "@/components/marketing/DemoAICaptions";
 import { DemoAIBroll } from "@/components/marketing/DemoAIBroll";
 import { DemoAutoPosting } from "@/components/marketing/DemoAutoPosting";
+import { PipelineSection } from "@/components/marketing/PipelineSection";
+import { ArchitectureSection } from "@/components/marketing/ArchitectureSection";
+import { FaqSection } from "@/components/marketing/FaqSection";
 
 export default function HomePage() {
   return (
@@ -77,68 +80,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Core Processing Pipeline */}
-      <section id="features" className="mx-auto mt-28 max-w-7xl">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold tracking-tight text-[#111118] dark:text-white sm:text-3xl">
-            Engineered Asynchronous Processing Pipeline
-          </h2>
-          <p className="mt-2 text-sm text-[#6B6B78] dark:text-[#A1A1AA]">
-            Every step executed on scalable server-side background workers with real-time state reporting.
-          </p>
-        </div>
-
-          <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Card className="hover:border-[#7C5CFC]/40">
-              <CardHeader className="p-5">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#7C5CFC]/10 text-[#A78BFA]">
-                  <Video className="h-5 w-5" />
-                </div>
-                <CardTitle className="text-base">1. Ingestion & Audio</CardTitle>
-                <CardDescription className="text-xs text-[#A1A1AA]">
-                  Direct multipart upload or YouTube URL import. Server extracts audio streams & probes metadata via
-                  FFmpeg.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="hover:border-[#7C5CFC]/40">
-              <CardHeader className="p-5">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#7C5CFC]/10 text-[#A78BFA]">
-                  <FileText className="h-5 w-5" />
-                </div>
-                <CardTitle className="text-base">2. Diarized Transcript</CardTitle>
-                <CardDescription className="text-xs text-[#A1A1AA]">
-                  Multi-speaker diarization with word-level micro-timestamps via OpenAI Whisper / Deepgram abstraction.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="hover:border-[#7C5CFC]/40">
-              <CardHeader className="p-5">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#7C5CFC]/10 text-[#A78BFA]">
-                  <Cpu className="h-5 w-5" />
-                </div>
-                <CardTitle className="text-base">3. AI Moment Scoring</CardTitle>
-                <CardDescription className="text-xs text-[#A1A1AA]">
-                  GPT-4o detects peaks in hook curiosity, emotional intensity, clarity, and story completeness.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="hover:border-[#7C5CFC]/40">
-              <CardHeader className="p-5">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#7C5CFC]/10 text-[#A78BFA]">
-                  <Sliders className="h-5 w-5" />
-                </div>
-                <CardTitle className="text-base">4. Reframe & Render</CardTitle>
-                <CardDescription className="text-xs text-[#A1A1AA]">
-                  Dynamic 9:16 vertical crop with face tracking, animated word-highlight subtitles, and instant export.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
-        </section>
+      <PipelineSection />
 
         {/* Animated Marketing Sections */}
         <section id="demo" className="mx-auto mt-28 max-w-6xl space-y-32">
@@ -209,105 +151,7 @@ export default function HomePage() {
 
         </section>
 
-        {/* Foundation Architecture Matrix */}
-        <section id="architecture" className="mx-auto mt-28 max-w-7xl">
-          <div className="text-center">
-            <h2 className="text-2xl font-bold tracking-tight text-[#111118] dark:text-white sm:text-3xl">
-              Foundation Architecture & Services
-            </h2>
-            <p className="mt-2 text-sm text-[#6B6B78] dark:text-[#A1A1AA]">
-              Fully decoupled provider abstractions allowing zero vendor lock-in.
-            </p>
-          </div>
-
-          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            <Card>
-              <CardHeader>
-                <div className="flex items-center space-x-2">
-                  <Database className="h-5 w-5 text-[#7C5CFC]" />
-                  <CardTitle className="text-base">Database & Models</CardTitle>
-                </div>
-                <CardDescription className="text-xs text-[#6B6B78] dark:text-[#A1A1AA]">PostgreSQL with Prisma ORM</CardDescription>
-              </CardHeader>
-              <CardContent className="text-xs text-[#6B6B78] dark:text-[#A1A1AA] space-y-2">
-                <p>• 18+ Relational models including Users, Subscriptions, Credits, Projects, Videos, Clips, Transcripts, Captions, Brands, and RenderJobs.</p>
-                <p>• Full multi-tenant isolation enforcing project ownership guards.</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <div className="flex items-center space-x-2">
-                  <HardDrive className="h-5 w-5 text-[#7C5CFC]" />
-                  <CardTitle className="text-base">Storage Abstraction</CardTitle>
-                </div>
-                <CardDescription className="text-xs text-[#6B6B78] dark:text-[#A1A1AA]">Cloudflare R2 / AWS S3 / Local</CardDescription>
-              </CardHeader>
-              <CardContent className="text-xs text-[#6B6B78] dark:text-[#A1A1AA] space-y-2">
-                <p>• Pluggable <code className="text-[#7C5CFC] dark:text-[#A78BFA]">IStorageService</code> interface.</p>
-                <p>• Local filesystem fallback for zero-cloud offline development.</p>
-                <p>• Presigned URL upload generation for high-bandwidth direct uploads.</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <div className="flex items-center space-x-2">
-                  <Layers className="h-5 w-5 text-[#7C5CFC]" />
-                  <CardTitle className="text-base">Queue & Workers</CardTitle>
-                </div>
-                <CardDescription className="text-xs text-[#6B6B78] dark:text-[#A1A1AA]">BullMQ + Redis / In-Process Local</CardDescription>
-              </CardHeader>
-              <CardContent className="text-xs text-[#6B6B78] dark:text-[#A1A1AA] space-y-2">
-                <p>• Decoupled <code className="text-[#7C5CFC] dark:text-[#A78BFA]">IQueueService</code> interface.</p>
-                <p>• Heavy video extraction and rendering never runs in browser or main thread.</p>
-                <p>• Real-time progress updates stored directly in database.</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <div className="flex items-center space-x-2">
-                  <Cpu className="h-5 w-5 text-[#7C5CFC]" />
-                  <CardTitle className="text-base">AI Provider Layer</CardTitle>
-                </div>
-                <CardDescription className="text-xs text-[#6B6B78] dark:text-[#A1A1AA]">Whisper / GPT-4o / Claude / Mock</CardDescription>
-              </CardHeader>
-              <CardContent className="text-xs text-[#6B6B78] dark:text-[#A1A1AA] space-y-2">
-                <p>• Pluggable transcription, clip moment detection, and hook generators.</p>
-                <p>• Built-in deterministic mock provider for zero-cost rapid dev.</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <div className="flex items-center space-x-2">
-                  <CreditCard className="h-5 w-5 text-[#7C5CFC]" />
-                  <CardTitle className="text-base">Billing & Credits</CardTitle>
-                </div>
-                <CardDescription className="text-xs text-[#6B6B78] dark:text-[#A1A1AA]">Stripe & Credit Ledger System</CardDescription>
-              </CardHeader>
-              <CardContent className="text-xs text-[#6B6B78] dark:text-[#A1A1AA] space-y-2">
-                <p>• Transactional credit balance deductions and top-ups.</p>
-                <p>• Detailed audit trail in <code className="text-[#7C5CFC] dark:text-[#A78BFA]">CreditTransaction</code> and <code className="text-[#7C5CFC] dark:text-[#A78BFA]">UsageLog</code>.</p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <div className="flex items-center space-x-2">
-                  <ShieldCheck className="h-5 w-5 text-[#7C5CFC]" />
-                  <CardTitle className="text-base">Auth & Security</CardTitle>
-                </div>
-                <CardDescription className="text-xs text-[#6B6B78] dark:text-[#A1A1AA]">JWT Sessions & Strict RBAC</CardDescription>
-              </CardHeader>
-              <CardContent className="text-xs text-[#6B6B78] dark:text-[#A1A1AA] space-y-2">
-                <p>• Self-hosted JWT session cookies with bcryptjs password hashing.</p>
-                <p>• Strict authorization guards protecting multi-user and admin routes.</p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
+        <ArchitectureSection />
         {/* Pricing Section */}
         <section id="pricing" className="mx-auto mt-32 max-w-7xl">
           <div className="text-center">
@@ -386,27 +230,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* FAQs */}
-        <section id="faq" className="mx-auto mt-32 max-w-4xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-extrabold tracking-tight text-[#111118] dark:text-white">
-              Frequently Asked Questions
-            </h2>
-          </div>
-          <div className="space-y-4">
-            {[
-              { q: "How accurate is the AI moment detection?", a: "Our system uses fine-tuned GPT-4o models that analyze transcript semantics, emotional intensity, and narrative arcs. It consistently identifies hooks that perform 40% better than random manual clipping." },
-              { q: "Do you support languages other than English?", a: "Yes, our Whisper-based transcription engine supports over 50 languages with automatic translation options for subtitles." },
-              { q: "What happens if I run out of minutes?", a: "You can easily purchase add-on credit packs without having to upgrade your base subscription plan. Credits never expire as long as your account is active." },
-              { q: "Can I customize the subtitle styles?", a: "Absolutely. You can upload custom fonts, change colors, adjust positioning, and apply dynamic animation presets (like pop, word-by-word highlight, or karaoke style)." }
-            ].map((faq, i) => (
-              <div key={i} className="rounded-2xl border border-[#E8E7F0] bg-white p-6 dark:border-[#27272A] dark:bg-[#141416]">
-                <h3 className="text-lg font-semibold text-[#111118] dark:text-white">{faq.q}</h3>
-                <p className="mt-2 text-sm text-[#6B6B78] dark:text-[#A1A1AA]">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        <FaqSection />
 
         {/* Final CTA */}
         <section className="mx-auto mt-32 mb-16 max-w-5xl">

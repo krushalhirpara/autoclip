@@ -533,9 +533,9 @@ export function Navbar() {
               type="button"
               onClick={() => setSearchModalOpen(true)}
               aria-label="Search features and docs (Cmd+K)"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E8E7F0] bg-white text-[#6B6B78] shadow-sm backdrop-blur-md transition-all duration-200 hover:border-[#7C5CFC] hover:bg-[#F4F3FF] hover:text-[#7C5CFC] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C5CFC] dark:border-white/10 dark:bg-white/[0.04] dark:text-[#A1A1AA] dark:hover:border-[#7C5CFC]/40 dark:hover:bg-white/10 dark:hover:text-white"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#E8E7F0] bg-white text-[#6B6B78] shadow-sm backdrop-blur-md transition-all duration-200 hover:border-[#7C5CFC] hover:bg-[#F4F3FF] hover:text-[#7C5CFC] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C5CFC] dark:border-white/10 dark:bg-white/[0.04] dark:text-[#A1A1AA] dark:hover:border-[#7C5CFC]/40 dark:hover:bg-white/10 dark:hover:text-white"
             >
-              <Search className="h-4 w-4" />
+              <Search className="h-[17px] w-[17px]" />
             </button>
 
             {/* Sign In (Text-only) */}
