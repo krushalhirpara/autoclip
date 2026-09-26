@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -52,11 +53,15 @@ export default function HomePage() {
         </p>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Button size="lg" className="rounded-full px-8 font-semibold bg-gradient-to-r from-[#7C5CFC] to-[#9B7CFF] text-white shadow-[0_4px_16px_rgba(124,92,252,0.35)] hover:shadow-[0_6px_24px_rgba(124,92,252,0.55)]">
-            <Video className="mr-2 h-5 w-5" /> Start Free Project
+          <Button asChild size="lg" className="rounded-full px-8 font-semibold bg-gradient-to-r from-[#7C5CFC] to-[#9B7CFF] text-white shadow-[0_4px_16px_rgba(124,92,252,0.35)] hover:shadow-[0_6px_24px_rgba(124,92,252,0.55)]">
+            <Link href="/signup">
+              <Video className="mr-2 h-5 w-5" /> Start Free Project
+            </Link>
           </Button>
-          <Button variant="secondary" size="lg" className="rounded-full px-6 font-semibold border border-[#E8E7F0] bg-white text-[#111118] hover:bg-[#F4F3FF] dark:border-[#27272A] dark:bg-[#1B1B1F] dark:text-white">
-            <Zap className="mr-2 h-5 w-5 text-[#7C5CFC] dark:text-[#A78BFA]" /> View Health API
+          <Button asChild variant="secondary" size="lg" className="rounded-full px-6 font-semibold border border-[#E8E7F0] bg-white text-[#111118] hover:bg-[#F4F3FF] dark:border-[#27272A] dark:bg-[#1B1B1F] dark:text-white">
+            <Link href="/health">
+              <Zap className="mr-2 h-5 w-5 text-[#7C5CFC] dark:text-[#A78BFA]" /> View Health API
+            </Link>
           </Button>
         </div>
       </div>
@@ -404,8 +409,8 @@ export default function HomePage() {
               Join thousands of creators using AutoClipp to dominate TikTok, YouTube Shorts, and Instagram Reels.
             </p>
             <div className="relative z-10 mt-10 flex flex-wrap items-center justify-center gap-4">
-              <Button size="lg" className="rounded-full bg-white px-8 text-[#111118] font-bold hover:bg-gray-100 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-                Start Free Project
+              <Button asChild size="lg" className="rounded-full bg-white px-8 text-[#111118] font-bold hover:bg-gray-100 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                <Link href="/signup">Start Free Project</Link>
               </Button>
               <Button variant="outline" size="lg" className="rounded-full border-white/20 bg-white/5 text-white backdrop-blur-sm hover:bg-white/10 px-8 font-bold">
                 Book a Demo
