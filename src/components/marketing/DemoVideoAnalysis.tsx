@@ -59,8 +59,6 @@ export function DemoVideoAnalysis() {
           <VideoThumbnail 
             duration="45:20" 
             label="SOURCE" 
-            videoSrc="/videos/source-demo.mp4" 
-            poster="/thumbnails/source-demo.webp"
           />
         </div>
         <div>

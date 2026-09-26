@@ -57,32 +57,16 @@ export function DemoSmartReframe() {
         </div>
         
         <div className="relative aspect-video w-full rounded-2xl overflow-hidden bg-[#111118] border border-[#E8E7F0] dark:border-[#27272A] shadow-xl">
-          <video
-            ref={videoRef}
-            src="/videos/reframe-demo.mp4"
-            poster="/thumbnails/reframe-demo.webp"
-            loop
-            muted
-            playsInline
-            autoPlay
-            onError={() => setVideoFailed(true)}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity ${videoFailed ? 'opacity-0' : 'opacity-100'}`}
-          />
-
-          {videoFailed && (
-            <>
-              {/* Fake Video Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 opacity-80" />
-              
-              {/* Moving Subject */}
-              <div 
-                className="absolute top-1/2 -translate-y-1/2 h-24 w-16 bg-white/20 backdrop-blur-md rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center justify-center border border-white/40 transition-all duration-[50ms] ease-linear"
-                style={{ left: `calc(${position}% - 32px)` }}
-              >
-                <div className="h-8 w-8 rounded-full bg-white/80" />
-              </div>
-            </>
-          )}
+          {/* Simulated Video Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 opacity-80" />
+          
+          {/* Moving Subject */}
+          <div 
+            className="absolute top-1/2 -translate-y-1/2 h-24 w-16 bg-white/20 backdrop-blur-md rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center justify-center border border-white/40 transition-all duration-[50ms] ease-linear"
+            style={{ left: `calc(${position}% - 32px)` }}
+          >
+            <div className="h-8 w-8 rounded-full bg-white/80" />
+          </div>
 
           {/* Tracking Frame */}
           <div 
@@ -112,32 +96,16 @@ export function DemoSmartReframe() {
         </div>
         
         <div className="relative aspect-[9/16] w-full rounded-2xl overflow-hidden bg-[#111118] border border-[#E8E7F0] dark:border-[#27272A] shadow-xl">
-          {!videoFailed && (
-            <video
-              src="/videos/reframe-demo.mp4"
-              poster="/thumbnails/reframe-demo.webp"
-              loop
-              muted
-              playsInline
-              autoPlay
-              className="absolute inset-0 w-full h-full object-cover scale-[1.3] origin-center"
-            />
-          )}
-
-          {videoFailed && (
-            <>
-              {/* We fake the crop by shifting the background opposite to the movement */}
-              <div 
-                className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 opacity-80 w-[316%] transition-all duration-[50ms] ease-linear"
-                style={{ left: `calc(-${position}vw * 3.16 + 50%)` /* Approximation for visual effect */ }}
-              />
-              
-              {/* Centered Subject in Result */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-40 w-28 bg-white/20 backdrop-blur-md rounded-[40px] shadow-[0_0_30px_rgba(255,255,255,0.4)] flex items-center justify-center border border-white/40">
-                <div className="h-12 w-12 rounded-full bg-white/80" />
-              </div>
-            </>
-          )}
+          {/* We fake the crop by shifting the background opposite to the movement */}
+          <div 
+            className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 opacity-80 w-[316%] transition-all duration-[50ms] ease-linear"
+            style={{ left: `calc(-${position}vw * 3.16 + 50%)` /* Approximation for visual effect */ }}
+          />
+          
+          {/* Centered Subject in Result */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-40 w-28 bg-white/20 backdrop-blur-md rounded-[40px] shadow-[0_0_30px_rgba(255,255,255,0.4)] flex items-center justify-center border border-white/40">
+            <div className="h-12 w-12 rounded-full bg-white/80" />
+          </div>
         </div>
       </div>
 

@@ -59,33 +59,14 @@ export function DemoAICaptions() {
       
       {/* 9:16 Video Mockup */}
       <div className="relative aspect-[9/16] w-64 rounded-2xl overflow-hidden bg-gradient-to-br from-[#1E1B32] to-[#0A0A0C] border-4 border-gray-900 shadow-2xl shrink-0">
-        {!videoFailed && (
-          <video
-            ref={videoRef}
-            src="/videos/captions-demo.mp4"
-            poster="/thumbnails/captions-demo.webp"
-            loop
-            muted
-            playsInline
-            autoPlay
-            onError={() => setVideoFailed(true)}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        )}
-        
-        {videoFailed && (
-          <>
-            {/* Simulated Creator Background */}
-            <div className="absolute inset-0 flex items-end justify-center">
-              <div className="w-3/4 h-2/3 bg-gradient-to-t from-black/80 to-[#7C5CFC]/20 rounded-t-full blur-sm border-t border-white/10" />
-              <div className="absolute top-1/4 w-24 h-24 bg-white/5 rounded-full blur-md" />
-            </div>
-            <div className="absolute top-4 right-4 flex items-center gap-1 bg-black/40 px-2 py-1 rounded-full backdrop-blur-sm border border-white/10">
-              <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-[10px] text-white font-semibold">REC</span>
-            </div>
-          </>
-        )}
+        {/* Simulated Creator Background */}
+        <div className="absolute inset-0 flex items-end justify-center">
+          <div className="w-3/4 h-2/3 bg-gradient-to-t from-black/80 to-[#7C5CFC]/20 rounded-t-full blur-sm border-t border-white/10" />
+          <div className="absolute top-1/4 w-24 h-24 bg-white/5 rounded-full blur-md" />
+        </div>
+        <div className="absolute top-4 right-4 flex items-center gap-1 bg-black/40 px-2 py-1 rounded-full backdrop-blur-sm border border-white/10">
+          <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+        </div>
         
         {/* Captions Area */}
         <div className="absolute bottom-24 left-4 right-4 flex flex-wrap justify-center gap-1.5 text-center">

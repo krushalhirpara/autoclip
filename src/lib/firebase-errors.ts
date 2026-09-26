@@ -5,6 +5,9 @@ export function getFriendlyAuthErrorMessage(error: any, defaultProviderName?: st
   const message = error.message || "";
 
   switch (code) {
+    case "auth/api-key-not-valid":
+    case "auth/invalid-api-key":
+      return "Authentication service configuration error (Invalid API Key). Please verify Firebase environment settings.";
     case "auth/invalid-credential":
     case "auth/wrong-password":
       return "Incorrect email or password.";

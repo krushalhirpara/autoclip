@@ -82,8 +82,6 @@ export function DemoAutoPosting() {
                 duration="14:20" 
                 label="" 
                 className="w-10 h-10 rounded-full" 
-                videoSrc="/videos/source-demo.mp4"
-                poster="/thumbnails/source-demo.webp"
               />
             </div>
             <p className="text-xs font-bold text-[#111118] dark:text-white uppercase">SOURCE VIDEO</p>
@@ -137,8 +135,6 @@ export function DemoAutoPosting() {
                 orientation="portrait" 
                 duration="00:45" 
                 label="" 
-                videoSrc="/videos/social-demo.mp4"
-                poster="/thumbnails/social-demo.webp"
               />
             </div>
             <div className="flex flex-col justify-between py-1">
@@ -169,8 +165,6 @@ export function DemoAutoPosting() {
                 orientation="portrait" 
                 duration="00:30" 
                 label="" 
-                videoSrc="/videos/social-demo.mp4"
-                poster="/thumbnails/social-demo.webp"
               />
             </div>
             <div className="flex flex-col justify-between py-1">
@@ -201,8 +195,6 @@ export function DemoAutoPosting() {
                 orientation="portrait" 
                 duration="00:20" 
                 label="" 
-                videoSrc="/videos/social-demo.mp4"
-                poster="/thumbnails/social-demo.webp"
               />
             </div>
             <div className="flex flex-col justify-between py-1">

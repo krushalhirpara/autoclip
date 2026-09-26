@@ -17,47 +17,29 @@ export function BrollPreview() {
 
   return (
     <div className="absolute inset-0 rounded-xl overflow-hidden border border-[#E8E7F0] dark:border-[#27272A] shadow-xl bg-[#111118]">
-      {!videoFailed && (
-        <video
-          ref={videoRef}
-          src="/videos/broll-demo.mp4"
-          poster="/thumbnails/broll-demo.webp"
-          loop
-          muted
-          playsInline
-          autoPlay
-          onError={() => setVideoFailed(true)}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      )}
+      {/* Simulated Stock Video: Editor Workspace */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-slate-800 to-purple-900 opacity-90" />
+      
+      {/* Laptop Screen glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-24 h-16 bg-blue-400/20 rounded blur-xl" />
+      
+      {/* Laptop shape */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-28 h-20 border-2 border-slate-600 rounded-t-lg bg-slate-800 flex flex-col justify-end">
+        {/* Screen Content - Editor Timeline Fake */}
+        <div className="flex-1 p-2 flex flex-col gap-1 opacity-60">
+          <div className="h-1 bg-slate-500 rounded w-full" />
+          <div className="h-2 bg-blue-500/50 rounded w-3/4" />
+          <div className="h-2 bg-purple-500/50 rounded w-1/2" />
+        </div>
+        {/* Keyboard base */}
+        <div className="h-1 w-32 -ml-2 bg-slate-400 rounded-b-xl border-t border-slate-500 shadow-xl" />
+      </div>
 
-      {videoFailed && (
-        <>
-          {/* Simulated Stock Video: Editor Workspace */}
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 via-slate-800 to-purple-900 opacity-90" />
-          
-          {/* Laptop Screen glow */}
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-24 h-16 bg-blue-400/20 rounded blur-xl" />
-          
-          {/* Laptop shape */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-28 h-20 border-2 border-slate-600 rounded-t-lg bg-slate-800 flex flex-col justify-end">
-            {/* Screen Content - Editor Timeline Fake */}
-            <div className="flex-1 p-2 flex flex-col gap-1 opacity-60">
-              <div className="h-1 bg-slate-500 rounded w-full" />
-              <div className="h-2 bg-blue-500/50 rounded w-3/4" />
-              <div className="h-2 bg-purple-500/50 rounded w-1/2" />
-            </div>
-            {/* Keyboard base */}
-            <div className="h-1 w-32 -ml-2 bg-slate-400 rounded-b-xl border-t border-slate-500 shadow-xl" />
-          </div>
-
-          {/* Subtle Pan/Scan Animation Effect */}
-          <div 
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"
-            style={{ transform: `translateX(${position * 2 - 100}%) skewX(12deg)` }}
-          />
-        </>
-      )}
+      {/* Subtle Pan/Scan Animation Effect */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12"
+        style={{ transform: `translateX(${position * 2 - 100}%) skewX(12deg)` }}
+      />
 
       {/* Overlay UI */}
       <div className="absolute top-2 left-2 right-2 flex justify-between items-start">

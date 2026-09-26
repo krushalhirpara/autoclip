@@ -56,8 +56,6 @@ export function DemoClipScoring() {
           label={`CLIP #${clips[activeClip].id}`}
           className="w-full h-full shadow-2xl"
           title="The Secret to Retention..."
-          videoSrc="/videos/clip-demo.mp4"
-          poster="/thumbnails/clip-demo.webp"
         />
       </div>
 
