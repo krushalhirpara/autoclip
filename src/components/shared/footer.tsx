@@ -1,8 +1,29 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Scissors, ShieldCheck, Heart, ExternalLink } from "lucide-react";
 
 export function Footer() {
+  const pathname = usePathname();
+  const isAuthPage = pathname === "/login" || pathname === "/signup";
+
+  if (isAuthPage) {
+    return (
+      <footer className="border-t border-gray-200 dark:border-[#27272A] bg-white dark:bg-[#0A0A0C] py-6 px-6 relative z-10 transition-colors">
+        <div className="mx-auto flex max-w-[460px] flex-col items-center justify-between gap-4 text-xs sm:flex-row text-gray-500 dark:text-[#71717A]">
+          <span>© {new Date().getFullYear()} AutoClipp Inc.</span>
+          <div className="flex items-center space-x-4">
+            <Link href="/privacy" className="hover:text-gray-900 dark:hover:text-white transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-gray-900 dark:hover:text-white transition-colors">Terms</Link>
+            <Link href="/security" className="hover:text-gray-900 dark:hover:text-white transition-colors">Security</Link>
+          </div>
+        </div>
+      </footer>
+    );
+  }
+
   return (
     <footer className="border-t border-gray-200 dark:border-[#27272A] bg-white dark:bg-[#0E0E11] text-gray-600 dark:text-[#A1A1AA] transition-colors">
       {/* Top Banner / Trust Bar */}
