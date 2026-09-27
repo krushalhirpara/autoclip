@@ -1,17 +1,38 @@
-import React from "react";
-import { Video, Image, MessageCircle, Briefcase, Users, Link, Unlink, AlertCircle } from "lucide-react";
+"use client";
+
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+import { Video, Image, MessageCircle, Briefcase, Users, Link as LinkIcon, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const PLATFORMS = [
   { id: "YOUTUBE", name: "YouTube", icon: Video, color: "text-red-500", bg: "bg-red-50 dark:bg-red-500/10" },
   { id: "INSTAGRAM", name: "Instagram", icon: Image, color: "text-pink-500", bg: "bg-pink-50 dark:bg-pink-500/10" },
-  { id: "TIKTOK", name: "TikTok", icon: null, color: "text-black dark:text-white", bg: "bg-gray-100 dark:bg-gray-800" }, // standard lucide doesn't have tiktok
+  { id: "TIKTOK", name: "TikTok", icon: null, color: "text-black dark:text-white", bg: "bg-gray-100 dark:bg-gray-800" },
   { id: "FACEBOOK", name: "Facebook", icon: Users, color: "text-blue-600", bg: "bg-blue-50 dark:bg-blue-600/10" },
   { id: "LINKEDIN", name: "LinkedIn", icon: Briefcase, color: "text-blue-700", bg: "bg-blue-50 dark:bg-blue-700/10" },
   { id: "X", name: "X (Twitter)", icon: MessageCircle, color: "text-blue-400", bg: "bg-blue-50 dark:bg-blue-400/10" },
 ];
 
 export default function SocialAccountsPage() {
+  const router = useRouter();
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/login");
+    }
+  }, [user, loading, router]);
+
+  if (loading || !user) {
+    return (
+      <div className="flex min-h-[calc(100vh-140px)] w-full items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-[#7C5CFC]" />
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-4xl mx-auto p-6 pt-20">
       <div className="mb-8">
@@ -44,7 +65,7 @@ export default function SocialAccountsPage() {
               </div>
               
               <Button variant="outline" size="sm" className="rounded-full border-[#DCD9E8] dark:border-[#27272A]" disabled>
-                <Link className="w-4 h-4 mr-2" /> Connect
+                <LinkIcon className="w-4 h-4 mr-2" /> Connect
               </Button>
             </div>
           );

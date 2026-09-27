@@ -128,8 +128,10 @@ enum PublishStatus {
 
 model User {
   id            String    @id @default(cuid())
+  firebaseUid   String?   @unique
   name          String?
   email         String    @unique
+  mobileNumber  String?
   emailVerified DateTime?
   image         String?
   passwordHash  String?

@@ -14,6 +14,8 @@ export interface SessionUser {
   name: string | null;
   role: UserRole;
   image: string | null;
+  mobileNumber?: string | null;
+  firebaseUid?: string | null;
 }
 
 export interface AuthSession {
@@ -36,6 +38,8 @@ export async function createSessionToken(user: SessionUser): Promise<string> {
     name: user.name,
     role: user.role,
     image: user.image,
+    mobileNumber: user.mobileNumber || null,
+    firebaseUid: user.firebaseUid || null,
   })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
@@ -52,6 +56,8 @@ export async function verifySessionToken(token: string): Promise<SessionUser | n
       name: (payload.name as string) || null,
       role: (payload.role as UserRole) || "USER",
       image: (payload.image as string) || null,
+      mobileNumber: (payload.mobileNumber as string) || null,
+      firebaseUid: (payload.firebaseUid as string) || null,
     };
   } catch {
     return null;

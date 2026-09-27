@@ -1,12 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
-import { Calendar as CalendarIcon, Clock, Plus, Video, Search } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+import { Calendar as CalendarIcon, Clock, Plus, Video, Search, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { VideoThumbnail } from "@/components/media/VideoThumbnail";
 
 export default function SchedulerPage() {
+  const router = useRouter();
+  const { user, loading } = useAuth();
   const [activeTab, setActiveTab] = useState("calendar");
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/login");
+    }
+  }, [user, loading, router]);
+
+  if (loading || !user) {
+    return (
+      <div className="flex min-h-[calc(100vh-140px)] w-full items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-[#7C5CFC]" />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto p-6 pt-20">

@@ -7,17 +7,20 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { getFriendlyAuthErrorMessage } from "@/lib/firebase-errors";
+import { isValidIndianMobile, normalizeIndianMobile } from "@/lib/validation";
 import { Scissors, Eye, EyeOff, Loader2 } from "lucide-react";
 import { AuthLayout } from "@/components/auth/AuthLayout";
-import { SocialAuthButtons } from "@/components/auth/SocialAuthButtons";
+import { SocialAuthButtons, OnboardingData } from "@/components/auth/SocialAuthButtons";
+import { ProfileCompletionModal } from "@/components/auth/ProfileCompletionModal";
 
 function SignupForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialError = searchParams.get("error");
-  const { user, loading } = useAuth();
+  const { user, loading, refreshProfile } = useAuth();
 
   const [name, setName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -28,12 +31,15 @@ function SignupForm() {
     initialError ? decodeURIComponent(initialError) : null
   );
 
+  // State for Google/Apple onboarding modal
+  const [onboardingData, setOnboardingData] = useState<OnboardingData | null>(null);
+
   // Authenticated route protection: Logged-in users redirect to /dashboard
   useEffect(() => {
-    if (!loading && user) {
+    if (!loading && user && !onboardingData) {
       router.replace("/dashboard");
     }
-  }, [user, loading, router]);
+  }, [user, loading, router, onboardingData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,6 +47,16 @@ function SignupForm() {
 
     if (!name.trim()) {
       setErrorMessage("Please enter your full name.");
+      return;
+    }
+
+    if (!mobileNumber.trim()) {
+      setErrorMessage("Please enter your mobile number.");
+      return;
+    }
+
+    if (!isValidIndianMobile(mobileNumber)) {
+      setErrorMessage("Please enter a valid 10-digit Indian mobile number.");
       return;
     }
 
@@ -62,6 +78,8 @@ function SignupForm() {
     setIsLoading(true);
     setErrorMessage(null);
 
+    const formattedMobile = normalizeIndianMobile(mobileNumber);
+
     try {
       // 1. Create account with Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), password);
@@ -79,9 +97,11 @@ function SignupForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          mode: "signup",
           uid: fbUser.uid,
           email: fbUser.email,
-          name: name.trim() || fbUser.displayName || null,
+          name: name.trim(),
+          mobileNumber: formattedMobile,
           image: fbUser.photoURL || null,
           provider: "password",
         }),
@@ -91,6 +111,8 @@ function SignupForm() {
       if (!syncRes.ok) {
         throw new Error(syncData.error || "Failed to initialize user session.");
       }
+
+      await refreshProfile();
 
       // 4. Redirect to dashboard
       router.push("/dashboard");
@@ -103,7 +125,7 @@ function SignupForm() {
     }
   };
 
-  if (loading || user) {
+  if (loading || (user && !onboardingData)) {
     return (
       <div className="flex items-center justify-center py-20">
         <Loader2 className="h-6 w-6 animate-spin text-[#7C5CFC]" />
@@ -143,8 +165,13 @@ function SignupForm() {
         </div>
       )}
 
-      {/* Social Providers (Google & Apple) */}
-      <SocialAuthButtons onError={setErrorMessage} disabled={isLoading} />
+      {/* Social Providers (Google & Apple) in Signup Mode */}
+      <SocialAuthButtons
+        mode="signup"
+        onError={setErrorMessage}
+        onRequireOnboarding={(data) => setOnboardingData(data)}
+        disabled={isLoading}
+      />
 
       {/* Divider */}
       <div className="my-6 flex items-center">
@@ -163,7 +190,7 @@ function SignupForm() {
             htmlFor="name"
             className="block text-[13px] font-medium text-gray-700 dark:text-gray-300 mb-1.5"
           >
-            Full Name
+            Full Name <span className="text-red-500">*</span>
           </label>
           <input
             id="name"
@@ -173,7 +200,28 @@ function SignupForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             disabled={isLoading}
-            placeholder="Jane Doe"
+            placeholder="Krushal Hirpara"
+            className="block h-[50px] w-full rounded-[10px] border border-gray-200 bg-white px-3.5 text-[15px] text-gray-900 placeholder:text-gray-400 transition-colors focus:border-[#7C5CFC] focus:outline-none focus:ring-2 focus:ring-[#7C5CFC]/20 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:placeholder:text-gray-500"
+          />
+        </div>
+
+        {/* Mobile Number */}
+        <div>
+          <label
+            htmlFor="mobileNumber"
+            className="block text-[13px] font-medium text-gray-700 dark:text-gray-300 mb-1.5"
+          >
+            Mobile Number <span className="text-red-500">*</span>
+          </label>
+          <input
+            id="mobileNumber"
+            type="tel"
+            autoComplete="tel"
+            required
+            value={mobileNumber}
+            onChange={(e) => setMobileNumber(e.target.value)}
+            disabled={isLoading}
+            placeholder="e.g. 9876543210 or +91 98765 43210"
             className="block h-[50px] w-full rounded-[10px] border border-gray-200 bg-white px-3.5 text-[15px] text-gray-900 placeholder:text-gray-400 transition-colors focus:border-[#7C5CFC] focus:outline-none focus:ring-2 focus:ring-[#7C5CFC]/20 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:placeholder:text-gray-500"
           />
         </div>
@@ -184,7 +232,7 @@ function SignupForm() {
             htmlFor="email"
             className="block text-[13px] font-medium text-gray-700 dark:text-gray-300 mb-1.5"
           >
-            Email
+            Email <span className="text-red-500">*</span>
           </label>
           <input
             id="email"
@@ -194,7 +242,7 @@ function SignupForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={isLoading}
-            placeholder="email@example.com"
+            placeholder="krushal@example.com"
             className="block h-[50px] w-full rounded-[10px] border border-gray-200 bg-white px-3.5 text-[15px] text-gray-900 placeholder:text-gray-400 transition-colors focus:border-[#7C5CFC] focus:outline-none focus:ring-2 focus:ring-[#7C5CFC]/20 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:placeholder:text-gray-500"
           />
         </div>
@@ -205,7 +253,7 @@ function SignupForm() {
             htmlFor="password"
             className="block text-[13px] font-medium text-gray-700 dark:text-gray-300 mb-1.5"
           >
-            Password
+            Password <span className="text-red-500">*</span>
           </label>
           <div className="relative">
             <input
@@ -237,7 +285,7 @@ function SignupForm() {
             htmlFor="confirmPassword"
             className="block text-[13px] font-medium text-gray-700 dark:text-gray-300 mb-1.5"
           >
-            Confirm Password
+            Confirm Password <span className="text-red-500">*</span>
           </label>
           <div className="relative">
             <input
@@ -290,6 +338,23 @@ function SignupForm() {
           Sign in
         </Link>
       </p>
+
+      {/* Google/Apple Onboarding Modal for New Users */}
+      {onboardingData && (
+        <ProfileCompletionModal
+          isOpen={true}
+          email={onboardingData.email}
+          initialName={onboardingData.initialName}
+          firebaseUid={onboardingData.firebaseUid}
+          photoURL={onboardingData.photoURL}
+          provider={onboardingData.provider}
+          onComplete={async () => {
+            await refreshProfile();
+            router.push("/dashboard");
+            router.refresh();
+          }}
+        />
+      )}
     </div>
   );
 }

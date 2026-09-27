@@ -3,7 +3,7 @@
 import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
 import { getFriendlyAuthErrorMessage } from "@/lib/firebase-errors";
@@ -15,7 +15,7 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialError = searchParams.get("error");
-  const { user, loading } = useAuth();
+  const { user, loading, refreshProfile } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,11 +50,12 @@ function LoginForm() {
       const userCredential = await signInWithEmailAndPassword(auth, email.trim(), password);
       const fbUser = userCredential.user;
 
-      // 2. Synchronize session with backend & PostgreSQL database
+      // 2. Synchronize session with backend & check application profile in login mode
       const syncRes = await fetch("/api/v1/auth/firebase-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          mode: "login",
           uid: fbUser.uid,
           email: fbUser.email,
           name: fbUser.displayName || null,
@@ -65,8 +66,12 @@ function LoginForm() {
 
       const syncData = await syncRes.json();
       if (!syncRes.ok) {
-        throw new Error(syncData.error || "Failed to synchronize user session.");
+        // If user profile not found in application database, sign out of Firebase
+        await signOut(auth);
+        throw new Error(syncData.error || "Account not found. Please create an account first.");
       }
+
+      await refreshProfile();
 
       // 3. Redirect to dashboard
       router.push("/dashboard");
@@ -74,10 +79,20 @@ function LoginForm() {
     } catch (err: any) {
       console.error("Login submission error:", err);
       const friendly = getFriendlyAuthErrorMessage(err);
-      setErrorMessage(friendly);
+      setErrorMessage(
+        err.message?.includes("Account not found") ? err.message : friendly
+      );
       setIsLoading(false);
     }
   };
+
+  if (loading || user) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="h-6 w-6 animate-spin text-[#7C5CFC]" />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
@@ -111,8 +126,8 @@ function LoginForm() {
         </div>
       )}
 
-      {/* Social Providers (Google & Apple) */}
-      <SocialAuthButtons onError={setErrorMessage} disabled={isLoading} />
+      {/* Social Providers (Google & Apple) in Login Mode */}
+      <SocialAuthButtons mode="login" onError={setErrorMessage} disabled={isLoading} />
 
       {/* Divider */}
       <div className="my-6 flex items-center">
@@ -141,7 +156,7 @@ function LoginForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={isLoading}
-            placeholder="email@example.com"
+            placeholder="krushal@example.com"
             className="block h-[50px] w-full rounded-[10px] border border-gray-200 bg-white px-3.5 text-[15px] text-gray-900 placeholder:text-gray-400 transition-colors focus:border-[#7C5CFC] focus:outline-none focus:ring-2 focus:ring-[#7C5CFC]/20 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:placeholder:text-gray-500"
           />
         </div>

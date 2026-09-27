@@ -2,23 +2,38 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, googleProvider, appleProvider } from "@/lib/firebase";
 import { getFriendlyAuthErrorMessage } from "@/lib/firebase-errors";
 import { Loader2 } from "lucide-react";
 
+export interface OnboardingData {
+  email: string;
+  initialName?: string;
+  firebaseUid: string;
+  photoURL?: string | null;
+  provider: "google" | "apple";
+}
+
 interface SocialAuthButtonsProps {
+  mode?: "login" | "signup";
   onError?: (error: string | null) => void;
+  onRequireOnboarding?: (data: OnboardingData) => void;
   disabled?: boolean;
 }
 
-export function SocialAuthButtons({ onError, disabled }: SocialAuthButtonsProps) {
+export function SocialAuthButtons({
+  mode = "login",
+  onError,
+  onRequireOnboarding,
+  disabled,
+}: SocialAuthButtonsProps) {
   const router = useRouter();
   const [loadingProvider, setLoadingProvider] = useState<"google" | "apple" | null>(null);
 
   const handleSocialLogin = async (providerName: "google" | "apple") => {
     if (loadingProvider || disabled) return;
-    
+
     setLoadingProvider(providerName);
     if (onError) onError(null);
 
@@ -31,27 +46,88 @@ export function SocialAuthButtons({ onError, disabled }: SocialAuthButtonsProps)
         throw new Error("Unable to retrieve email from identity provider.");
       }
 
-      // Sync with PostgreSQL database & establish HTTP session
-      const sessionRes = await fetch("/api/v1/auth/firebase-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          uid: user.uid,
-          email: user.email,
-          name: user.displayName || null,
-          image: user.photoURL || null,
-          provider: providerName,
-        }),
-      });
+      // If on /signup page: check if user exists or needs onboarding
+      if (mode === "signup") {
+        const checkRes = await fetch("/api/v1/auth/firebase-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            mode: "check",
+            uid: user.uid,
+            email: user.email,
+            provider: providerName,
+          }),
+        });
 
-      const sessionData = await sessionRes.json();
-      if (!sessionRes.ok) {
-        throw new Error(sessionData.error || "Failed to create application session");
+        const checkData = await checkRes.json();
+
+        // If existing user already in database, log them in directly
+        if (checkData.exists) {
+          const sessionRes = await fetch("/api/v1/auth/firebase-session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              mode: "login",
+              uid: user.uid,
+              email: user.email,
+              name: user.displayName || null,
+              image: user.photoURL || null,
+              provider: providerName,
+            }),
+          });
+
+          if (sessionRes.ok) {
+            router.push("/dashboard");
+            router.refresh();
+            return;
+          }
+        }
+
+        // New application user: open profile onboarding modal
+        if (onRequireOnboarding) {
+          onRequireOnboarding({
+            email: user.email,
+            initialName: user.displayName || "",
+            firebaseUid: user.uid,
+            photoURL: user.photoURL || null,
+            provider: providerName,
+          });
+          setLoadingProvider(null);
+          return;
+        }
       }
 
-      // Successful login -> Redirect to dashboard
-      router.push("/dashboard");
-      router.refresh();
+      // If on /login page: Check if profile exists; if not, reject & signOut
+      if (mode === "login") {
+        const sessionRes = await fetch("/api/v1/auth/firebase-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            mode: "login",
+            uid: user.uid,
+            email: user.email,
+            name: user.displayName || null,
+            image: user.photoURL || null,
+            provider: providerName,
+          }),
+        });
+
+        const sessionData = await sessionRes.json();
+
+        if (sessionRes.status === 404 || !sessionRes.ok) {
+          // Sign user out of Firebase immediately
+          await signOut(auth);
+          if (onError) {
+            onError(sessionData.error || "Account not found. Please create an account first.");
+          }
+          setLoadingProvider(null);
+          return;
+        }
+
+        // Successful login -> Redirect to dashboard
+        router.push("/dashboard");
+        router.refresh();
+      }
     } catch (err: any) {
       console.error(`Firebase ${providerName} sign-in error:`, err);
       const friendlyMessage = getFriendlyAuthErrorMessage(

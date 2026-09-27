@@ -4,10 +4,10 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { Scissors, LogOut, User, Mail, Shield, Loader2, ArrowRight } from "lucide-react";
+import { Scissors, LogOut, User, Mail, Phone, Edit3, Loader2, ArrowRight } from "lucide-react";
 
 export default function Dashboard() {
-  const { user, loading, logout } = useAuth();
+  const { user, profile, loading, logout } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -27,7 +27,9 @@ export default function Dashboard() {
     );
   }
 
-  const primaryProvider = user.providerData?.[0]?.providerId || "password";
+  const fullName = profile?.fullName || profile?.name || user.displayName || "Creator";
+  const email = profile?.email || user.email || "";
+  const mobileNumber = profile?.mobileNumber || "Not provided";
 
   return (
     <main className="min-h-[calc(100vh-140px)] w-full bg-[#FAFAFC] dark:bg-[#09090B] px-4 py-12 sm:px-6 lg:px-8 transition-colors">
@@ -44,7 +46,7 @@ export default function Dashboard() {
                 Workspace Dashboard
               </h1>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Welcome back, {user.displayName || user.email?.split("@")[0] || "Creator"}
+                Welcome back, {fullName}
               </p>
             </div>
           </div>
@@ -58,25 +60,47 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {/* User Profile Card */}
+        {/* User Profile Summary Card */}
         <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#121216]">
-          <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
-            Authenticated Profile
-          </h2>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 dark:border-white/5 pb-4 mb-6">
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-[#7C5CFC] to-[#9B7CFF] text-white font-bold text-lg shadow-sm">
+                {fullName.charAt(0).toUpperCase()}
+              </div>
+              <div>
+                <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+                  Your Profile
+                </h2>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Manage your personal account details
+                </p>
+              </div>
+            </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Link
+              href="/profile"
+              className="inline-flex items-center justify-center gap-1.5 rounded-[10px] bg-[#7C5CFC] px-4 py-2 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#6D49F0] focus:outline-none focus:ring-2 focus:ring-[#7C5CFC]/30"
+            >
+              <Edit3 className="h-3.5 w-3.5" />
+              <span>Edit Profile</span>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {/* Full Name */}
             <div className="flex items-center space-x-3 rounded-xl border border-gray-100 bg-gray-50/70 p-4 dark:border-white/5 dark:bg-white/[0.02]">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#7C5CFC]/10 text-[#7C5CFC]">
                 <User className="h-5 w-5" />
               </div>
               <div className="overflow-hidden">
-                <p className="text-xs font-medium text-gray-400">Full Name / Display</p>
+                <p className="text-xs font-medium text-gray-400">Full Name</p>
                 <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
-                  {user.displayName || "Not set"}
+                  {fullName}
                 </p>
               </div>
             </div>
 
+            {/* Email Address */}
             <div className="flex items-center space-x-3 rounded-xl border border-gray-100 bg-gray-50/70 p-4 dark:border-white/5 dark:bg-white/[0.02]">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/10 text-blue-600">
                 <Mail className="h-5 w-5" />
@@ -84,31 +108,20 @@ export default function Dashboard() {
               <div className="overflow-hidden">
                 <p className="text-xs font-medium text-gray-400">Email Address</p>
                 <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
-                  {user.email}
+                  {email}
                 </p>
               </div>
             </div>
 
+            {/* Mobile Number */}
             <div className="flex items-center space-x-3 rounded-xl border border-gray-100 bg-gray-50/70 p-4 dark:border-white/5 dark:bg-white/[0.02]">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600">
-                <Shield className="h-5 w-5" />
+                <Phone className="h-5 w-5" />
               </div>
               <div className="overflow-hidden">
-                <p className="text-xs font-medium text-gray-400">Auth Provider</p>
-                <p className="text-sm font-semibold text-gray-900 dark:text-white capitalize">
-                  {primaryProvider.replace(".com", "")}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center space-x-3 rounded-xl border border-gray-100 bg-gray-50/70 p-4 dark:border-white/5 dark:bg-white/[0.02]">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500/10 text-purple-600">
-                <span className="text-xs font-bold font-mono">UID</span>
-              </div>
-              <div className="overflow-hidden">
-                <p className="text-xs font-medium text-gray-400">Firebase User UID</p>
-                <p className="text-xs font-mono font-semibold text-gray-900 dark:text-white truncate">
-                  {user.uid}
+                <p className="text-xs font-medium text-gray-400">Mobile Number</p>
+                <p className="text-sm font-semibold text-gray-900 dark:text-white truncate">
+                  {mobileNumber}
                 </p>
               </div>
             </div>
