@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { useAuth } from "@/context/AuthContext";
 import { getFriendlyAuthErrorMessage } from "@/lib/firebase-errors";
 import { Scissors, Eye, EyeOff, Loader2 } from "lucide-react";
 import { AuthLayout } from "@/components/auth/AuthLayout";
@@ -14,15 +15,25 @@ function SignupForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialError = searchParams.get("error");
+  const { user, loading } = useAuth();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(
     initialError ? decodeURIComponent(initialError) : null
   );
+
+  // Authenticated route protection: Logged-in users redirect to /dashboard
+  useEffect(() => {
+    if (!loading && user) {
+      router.replace("/dashboard");
+    }
+  }, [user, loading, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +54,11 @@ function SignupForm() {
       return;
     }
 
+    if (password !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+      return;
+    }
+
     setIsLoading(true);
     setErrorMessage(null);
 
@@ -51,7 +67,7 @@ function SignupForm() {
       const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), password);
       const fbUser = userCredential.user;
 
-      // 2. Set user display name
+      // 2. Set user display name with Full Name
       if (name.trim()) {
         await updateProfile(fbUser, {
           displayName: name.trim(),
@@ -86,6 +102,14 @@ function SignupForm() {
       setIsLoading(false);
     }
   };
+
+  if (loading || user) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="h-6 w-6 animate-spin text-[#7C5CFC]" />
+      </div>
+    );
+  }
 
   return (
     <div className="w-full">
@@ -203,6 +227,38 @@ function SignupForm() {
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
               {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Confirm Password */}
+        <div>
+          <label
+            htmlFor="confirmPassword"
+            className="block text-[13px] font-medium text-gray-700 dark:text-gray-300 mb-1.5"
+          >
+            Confirm Password
+          </label>
+          <div className="relative">
+            <input
+              id="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              autoComplete="new-password"
+              required
+              minLength={6}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              disabled={isLoading}
+              placeholder="•••••••••••"
+              className="block h-[50px] w-full rounded-[10px] border border-gray-200 bg-white pl-3.5 pr-11 text-[15px] text-gray-900 placeholder:text-gray-400 transition-colors focus:border-[#7C5CFC] focus:outline-none focus:ring-2 focus:ring-[#7C5CFC]/20 disabled:cursor-not-allowed disabled:opacity-60 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:placeholder:text-gray-500"
+            />
+            <button
+              type="button"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-gray-400 hover:text-gray-600 focus:outline-none dark:hover:text-gray-300"
+              aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
+            >
+              {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           </div>
         </div>

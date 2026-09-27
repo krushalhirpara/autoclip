@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { useAuth } from "@/context/AuthContext";
 import { getFriendlyAuthErrorMessage } from "@/lib/firebase-errors";
 import { Scissors, Eye, EyeOff, Loader2 } from "lucide-react";
 import { AuthLayout } from "@/components/auth/AuthLayout";
@@ -14,6 +15,7 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialError = searchParams.get("error");
+  const { user, loading } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +25,13 @@ function LoginForm() {
   const [errorMessage, setErrorMessage] = useState<string | null>(
     initialError ? decodeURIComponent(initialError) : null
   );
+
+  // Authenticated route protection: Logged-in users redirect to /dashboard
+  useEffect(() => {
+    if (!loading && user) {
+      router.replace("/dashboard");
+    }
+  }, [user, loading, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
