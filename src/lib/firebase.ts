@@ -11,6 +11,29 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "",
 };
 
+// Safe runtime diagnostic (Browser only - NEVER logs the complete key)
+if (typeof window !== "undefined") {
+  const rawKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "";
+  const keyLen = rawKey.length;
+  const prefix = keyLen >= 6 ? rawKey.substring(0, 6) : "(empty/short)";
+  const suffix = keyLen >= 4 ? rawKey.substring(keyLen - 4) : "(empty/short)";
+
+  console.log(
+    "%c[Firebase Runtime Diagnostic]",
+    "color: #7C5CFC; font-weight: bold; font-size: 12px;",
+    {
+      apiKeyPresent: Boolean(rawKey),
+      apiKeyLength: keyLen,
+      apiKeyPrefix: prefix,
+      apiKeySuffix: suffix,
+      projectId: firebaseConfig.projectId,
+      authDomain: firebaseConfig.authDomain,
+      storageBucket: firebaseConfig.storageBucket,
+      appId: firebaseConfig.appId,
+    }
+  );
+}
+
 // Safe initialization of Firebase App instance
 function getFirebaseApp(): FirebaseApp {
   if (getApps().length > 0) {
