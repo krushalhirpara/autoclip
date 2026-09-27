@@ -13,24 +13,15 @@ const firebaseConfig = {
 
 // Safe runtime diagnostic (Browser only - NEVER logs the complete key)
 if (typeof window !== "undefined") {
-  const rawKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "";
+  const rawKey = String(process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "");
   const keyLen = rawKey.length;
-  const prefix = keyLen >= 6 ? rawKey.substring(0, 6) : "(empty/short)";
-  const suffix = keyLen >= 4 ? rawKey.substring(keyLen - 4) : "(empty/short)";
+  const prefix = keyLen >= 6 ? rawKey.slice(0, 6) : "(empty/short)";
+  const suffix = keyLen >= 4 ? rawKey.slice(-4) : "(empty/short)";
 
   console.log(
-    "%c[Firebase Runtime Diagnostic]",
-    "color: #7C5CFC; font-weight: bold; font-size: 12px;",
-    {
-      apiKeyPresent: Boolean(rawKey),
-      apiKeyLength: keyLen,
-      apiKeyPrefix: prefix,
-      apiKeySuffix: suffix,
-      projectId: firebaseConfig.projectId,
-      authDomain: firebaseConfig.authDomain,
-      storageBucket: firebaseConfig.storageBucket,
-      appId: firebaseConfig.appId,
-    }
+    `%c[Firebase Diagnostic]%c\n• apiKeyPresent: ${Boolean(rawKey)}\n• apiKeyLength: ${keyLen}\n• apiKeyPrefix: "${prefix}"\n• apiKeySuffix: "${suffix}"\n• projectId: "${firebaseConfig.projectId}"\n• authDomain: "${firebaseConfig.authDomain}"`,
+    "color: #7C5CFC; font-weight: bold; font-size: 13px;",
+    "color: inherit; font-family: monospace; font-size: 12px;"
   );
 }
 
