@@ -39,8 +39,7 @@ export function Footer() {
               All Systems Operational (99.99% Uptime)
             </span>
             <Link
-              href="/api/v1/health"
-              target="_blank"
+              href="/health"
               className="inline-flex items-center text-purple-600 dark:text-[#A78BFA] hover:underline"
             >
               System API Health <ExternalLink className="ml-1 h-3 w-3" />
@@ -153,7 +152,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/api/v1/health" target="_blank" className="hover:text-gray-900 dark:text-white transition-colors">
+                <Link href="/health" className="hover:text-gray-900 dark:text-white transition-colors">
                   API Status & Health
                 </Link>
               </li>

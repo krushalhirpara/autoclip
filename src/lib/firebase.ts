@@ -21,25 +21,55 @@ function getFirebaseApp(): FirebaseApp {
 
 export const app: FirebaseApp = getFirebaseApp();
 
-// Safe initialization of Firebase Auth
+// Safe initialization of Firebase Auth with fallback when API key is unconfigured in development
 let _authInstance: Auth | null = null;
 function getFirebaseAuth(): Auth {
   if (_authInstance) return _authInstance;
 
+  if (!firebaseConfig.apiKey) {
+    _authInstance = {
+      currentUser: null,
+      app: app,
+      name: "[DEFAULT]",
+      config: firebaseConfig,
+      onAuthStateChanged: (callback: (user: any) => void) => {
+        callback(null);
+        return () => {};
+      },
+      onIdTokenChanged: (callback: (user: any) => void) => {
+        callback(null);
+        return () => {};
+      },
+      signOut: async () => {},
+    } as unknown as Auth;
+    return _authInstance;
+  }
+
   try {
     _authInstance = getAuth(app);
   } catch (err: any) {
-    // In server-side SSG prerendering without an API key, prevent build crash
-    if (typeof window === "undefined") {
-      return {} as Auth;
-    }
-    throw err;
+    console.warn("Firebase Auth could not be initialized:", err?.message || err);
+    _authInstance = {
+      currentUser: null,
+      app: app,
+      name: "[DEFAULT]",
+      config: firebaseConfig,
+      onAuthStateChanged: (callback: (user: any) => void) => {
+        callback(null);
+        return () => {};
+      },
+      onIdTokenChanged: (callback: (user: any) => void) => {
+        callback(null);
+        return () => {};
+      },
+      signOut: async () => {},
+    } as unknown as Auth;
   }
   return _authInstance;
 }
 
 export const auth: Auth = typeof window !== "undefined" && firebaseConfig.apiKey
-  ? getAuth(app)
+  ? getFirebaseAuth()
   : (new Proxy({} as Auth, {
       get(target, prop, receiver) {
         const instance = getFirebaseAuth();
