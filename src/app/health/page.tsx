@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   Activity,
@@ -23,7 +23,7 @@ import {
   Radio,
   ShieldAlert,
 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
@@ -72,48 +72,58 @@ export default function HealthPage() {
   const [copied, setCopied] = useState(false);
   const [timeAgo, setTimeAgo] = useState<string>("just now");
 
-  const fetchHealth = useCallback(async (isManual = false) => {
-    if (isManual) {
-      setRefreshing(true);
-    }
+  const refreshManual = async () => {
+    setRefreshing(true);
     try {
       const res = await fetch("/api/v1/health", {
         cache: "no-store",
-        headers: {
-          "Cache-Control": "no-cache",
-        },
+        headers: { "Cache-Control": "no-cache" },
       });
-
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}`);
-      }
-
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       const json: HealthResponse = await res.json();
       setData(json);
       setError(false);
       setLastCheckedTime(new Date(json.timestamp || Date.now()));
     } catch (err) {
-      console.error("Failed to fetch system health status:", err);
+      console.error("Failed to refresh health status:", err);
       setError(true);
-      if (!data) {
-        setLastCheckedTime(new Date());
-      }
     } finally {
-      setLoading(false);
       setRefreshing(false);
     }
-  }, [data]);
+  };
 
   // Initial fetch and auto-refresh every 30 seconds
   useEffect(() => {
-    fetchHealth(false);
+    let isMounted = true;
 
-    const interval = setInterval(() => {
-      fetchHealth(false);
-    }, 30000);
+    async function poll() {
+      try {
+        const res = await fetch("/api/v1/health", {
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache" },
+        });
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const json: HealthResponse = await res.json();
+        if (isMounted) {
+          setData(json);
+          setError(false);
+          setLastCheckedTime(new Date(json.timestamp || Date.now()));
+        }
+      } catch (err) {
+        console.error("Failed to fetch system health status:", err);
+        if (isMounted) setError(true);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
 
-    return () => clearInterval(interval);
-  }, [fetchHealth]);
+    poll();
+    const interval = setInterval(poll, 30000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, []);
 
   // Dynamic relative time update
   useEffect(() => {
@@ -286,7 +296,7 @@ export default function HealthPage() {
             </div>
 
             <Button
-              onClick={() => fetchHealth(true)}
+              onClick={refreshManual}
               disabled={loading || refreshing}
               aria-label="Refresh API Health Status"
               variant="outline"
@@ -313,7 +323,7 @@ export default function HealthPage() {
             <Button
               size="sm"
               variant="outline"
-              onClick={() => fetchHealth(true)}
+              onClick={refreshManual}
               className="h-8 rounded-lg border-red-300 bg-white text-xs text-red-700 hover:bg-red-100 dark:border-red-800 dark:bg-red-900/40 dark:text-red-200"
             >
               Retry Now

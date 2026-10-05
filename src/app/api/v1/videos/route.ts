@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireUser } from "@/server/auth/guards";
+import { requireUser, requireProjectAccess } from "@/server/auth/guards";
 import { VideoService } from "@/server/services/video.service";
 import { CreditService } from "@/server/services/credit.service";
 import { getStorageService } from "@/core/storage";
@@ -21,6 +21,9 @@ export async function POST(request: NextRequest) {
     if (!projectId) {
       return NextResponse.json({ error: "projectId is required" }, { status: 400 });
     }
+
+    // Verify user ownership of the project
+    await requireProjectAccess(projectId, user);
 
     if (!file) {
       return NextResponse.json({ error: "No video file provided" }, { status: 400 });

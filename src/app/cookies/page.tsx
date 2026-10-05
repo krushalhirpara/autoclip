@@ -88,7 +88,7 @@ export default function CookiePolicyPage() {
               necessary cookies will prevent you from signing in or using the AutoClipp editor.
             </p>
             <p>
-              For further questions regarding our cookie practices, reach out to <a href="mailto:privacy@autoclipp.local" className="text-purple-600 dark:text-[#A78BFA] underline">privacy@autoclipp.local</a>.
+              For further questions regarding our cookie practices, reach out to <a href="mailto:privacy@autoclipp.com" className="text-purple-600 dark:text-[#A78BFA] underline">privacy@autoclipp.com</a>.
             </p>
           </section>
         </div>

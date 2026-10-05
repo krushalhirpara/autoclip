@@ -13,7 +13,7 @@ interface ProfileCompletionModalProps {
   firebaseUid: string;
   photoURL?: string | null;
   provider: "google" | "apple" | string;
-  onComplete: (user: any) => void;
+  onComplete: (user: Record<string, unknown>) => void;
 }
 
 export function ProfileCompletionModal({
@@ -91,9 +91,9 @@ export function ProfileCompletionModal({
       }
 
       onComplete(data.user);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Profile completion error:", err);
-      setErrorMessage(err.message || "Failed to complete profile. Please try again.");
+      setErrorMessage(err instanceof Error ? err.message : "Failed to complete profile. Please try again.");
       setIsLoading(false);
     }
   };
@@ -111,7 +111,7 @@ export function ProfileCompletionModal({
             Complete your AutoClipp profile
           </h2>
           <p className="mt-1.5 text-xs text-gray-500 dark:text-gray-400">
-            {providerTitle} account connected successfully. Let's finish setting up your workspace.
+            {providerTitle} account connected successfully. Let&apos;s finish setting up your workspace.
           </p>
         </div>
 

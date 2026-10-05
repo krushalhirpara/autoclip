@@ -163,7 +163,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:support@autoclipp.local"
+                  href="mailto:support@autoclipp.com"
                   className="hover:text-purple-600 dark:text-[#A78BFA] transition-colors"
                 >
                   Contact Support

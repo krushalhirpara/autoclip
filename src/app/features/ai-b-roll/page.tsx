@@ -92,7 +92,7 @@ export default function Page() {
           </div>
         </div>
         <div className="flex bg-black/5 dark:bg-white/5 rounded-lg p-2 items-center">
-          <div className="text-xs text-[#6B6B78] dark:text-[#A1A1AA] flex-1">"The stock market crashed in 2008..."</div>
+          <div className="text-xs text-[#6B6B78] dark:text-[#A1A1AA] flex-1">&quot;The stock market crashed in 2008...&quot;</div>
           <div className="bg-[#7C5CFC] text-white text-[10px] px-2 py-1 rounded font-bold">INSERT B-ROLL</div>
         </div>
       </div>

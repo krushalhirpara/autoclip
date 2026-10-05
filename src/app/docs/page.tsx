@@ -81,8 +81,8 @@ export default function Page() {
       <div className="w-full h-full bg-[#0A0A0C] rounded-xl font-mono text-[10px] text-green-400 p-4 flex flex-col space-y-2 border border-gray-800 text-left">
         <div className="text-gray-500">POST /api/v1/projects</div>
         <div>{'{'}</div>
-        <div className="pl-4"><span className="text-blue-300">"videoUrl"</span>: <span className="text-yellow-300">"https://youtube.com/..."</span>,</div>
-        <div className="pl-4"><span className="text-blue-300">"webhook"</span>: <span className="text-yellow-300">"https://api.acme.com/hook"</span></div>
+        <div className="pl-4"><span className="text-blue-300">&quot;videoUrl&quot;</span>: <span className="text-yellow-300">&quot;https://youtube.com/...&quot;</span>,</div>
+        <div className="pl-4"><span className="text-blue-300">&quot;webhook&quot;</span>: <span className="text-yellow-300">&quot;https://api.acme.com/hook&quot;</span></div>
         <div>{'}'}</div>
         <div className="text-gray-500 mt-2">HTTP/1.1 200 OK</div>
       </div>

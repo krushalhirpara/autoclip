@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { Search, Film, Layers } from "lucide-react";
+import { Search, Layers } from "lucide-react";
 import { BrollPreview } from "../media/BrollPreview";
 
 export function DemoAIBroll() {
@@ -26,7 +26,6 @@ export function DemoAIBroll() {
   useEffect(() => {
     if (!inView) return;
     
-    let interval: NodeJS.Timeout;
     const runAnimation = () => {
       setStep(0); // Start
       
@@ -37,7 +36,7 @@ export function DemoAIBroll() {
     };
     
     runAnimation();
-    interval = setInterval(runAnimation, 8000); // Loop
+    const interval = setInterval(runAnimation, 8000); // Loop
     
     return () => clearInterval(interval);
   }, [inView]);

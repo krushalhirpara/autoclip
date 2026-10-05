@@ -117,7 +117,7 @@ function SignupForm() {
       // 4. Redirect to dashboard
       router.push("/dashboard");
       router.refresh();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Signup submission error:", err);
       const friendly = getFriendlyAuthErrorMessage(err);
       setErrorMessage(friendly);

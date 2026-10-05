@@ -183,7 +183,7 @@ export default function PrivacyPolicyPage() {
               <li>Right to withdraw consent or object to processing.</li>
             </ul>
             <p>
-              To exercise any of these rights, contact us directly at <a href="mailto:privacy@autoclipp.local" className="text-purple-600 dark:text-[#A78BFA] underline">privacy@autoclipp.local</a>.
+              To exercise any of these rights, contact us directly at <a href="mailto:privacy@autoclipp.com" className="text-purple-600 dark:text-[#A78BFA] underline">privacy@autoclipp.com</a>.
             </p>
           </section>
         </div>

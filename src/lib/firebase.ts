@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, OAuthProvider, Auth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, OAuthProvider, Auth, User } from "firebase/auth";
 
 // Firebase Web App Configuration (Project: autoclipp, Project ID: autoclipp-d9e1d)
 const firebaseConfig = {
@@ -32,11 +32,11 @@ function getFirebaseAuth(): Auth {
       app: app,
       name: "[DEFAULT]",
       config: firebaseConfig,
-      onAuthStateChanged: (callback: (user: any) => void) => {
+      onAuthStateChanged: (callback: (user: User | null) => void) => {
         callback(null);
         return () => {};
       },
-      onIdTokenChanged: (callback: (user: any) => void) => {
+      onIdTokenChanged: (callback: (user: User | null) => void) => {
         callback(null);
         return () => {};
       },
@@ -47,18 +47,19 @@ function getFirebaseAuth(): Auth {
 
   try {
     _authInstance = getAuth(app);
-  } catch (err: any) {
-    console.warn("Firebase Auth could not be initialized:", err?.message || err);
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.warn("Firebase Auth could not be initialized:", message);
     _authInstance = {
       currentUser: null,
       app: app,
       name: "[DEFAULT]",
       config: firebaseConfig,
-      onAuthStateChanged: (callback: (user: any) => void) => {
+      onAuthStateChanged: (callback: (user: User | null) => void) => {
         callback(null);
         return () => {};
       },
-      onIdTokenChanged: (callback: (user: any) => void) => {
+      onIdTokenChanged: (callback: (user: User | null) => void) => {
         callback(null);
         return () => {};
       },

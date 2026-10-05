@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { CheckCircle2, Loader2, Play } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 import { VideoThumbnail } from "../media/VideoThumbnail";
 
 export function DemoVideoAnalysis() {
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
-  const [step, setStep] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -38,12 +37,7 @@ export function DemoVideoAnalysis() {
     return () => clearInterval(progressInterval);
   }, [inView, progress]);
 
-  useEffect(() => {
-    if (progress > 20 && step < 1) setStep(1);
-    if (progress > 50 && step < 2) setStep(2);
-    if (progress > 75 && step < 3) setStep(3);
-    if (progress === 100 && step < 4) setStep(4);
-  }, [progress, step]);
+  const step = progress === 100 ? 4 : progress > 75 ? 3 : progress > 50 ? 2 : progress > 20 ? 1 : 0;
 
   const steps = [
     { id: 1, label: "Transcript generated" },

@@ -5,8 +5,6 @@ import { Film } from "lucide-react";
 
 export function BrollPreview() {
   const [position, setPosition] = useState(0);
-  const [videoFailed, setVideoFailed] = useState(false);
-  const videoRef = React.useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -53,7 +51,7 @@ export function BrollPreview() {
       
       <div className="absolute bottom-2 left-2 right-2 bg-black/60 backdrop-blur-md rounded px-2 py-1 border border-white/10">
         <p className="text-[10px] font-bold text-white truncate">video_editing_4k.mp4</p>
-        <p className="text-[8px] font-medium text-[#FACC15]">Keyword: "editing"</p>
+        <p className="text-[8px] font-medium text-[#FACC15]">Keyword: &quot;editing&quot;</p>
       </div>
     </div>
   );

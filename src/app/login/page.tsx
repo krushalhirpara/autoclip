@@ -76,11 +76,12 @@ function LoginForm() {
       // 3. Redirect to dashboard
       router.push("/dashboard");
       router.refresh();
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Login submission error:", err);
       const friendly = getFriendlyAuthErrorMessage(err);
+      const message = err instanceof Error ? err.message : String(err);
       setErrorMessage(
-        err.message?.includes("Account not found") ? err.message : friendly
+        message.includes("Account not found") ? message : friendly
       );
       setIsLoading(false);
     }
@@ -232,7 +233,7 @@ function LoginForm() {
 
       {/* Sign Up Link */}
       <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <Link
           href="/signup"
           className="font-semibold text-gray-900 hover:text-[#7C5CFC] dark:text-white dark:hover:text-[#7C5CFC] transition-colors focus:outline-none focus-visible:underline"

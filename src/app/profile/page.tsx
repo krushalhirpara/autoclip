@@ -25,11 +25,14 @@ export default function ProfilePage() {
   const router = useRouter();
   const { user, profile, loading, refreshProfile } = useAuth();
 
-  const [fullName, setFullName] = useState("");
-  const [mobileNumber, setMobileNumber] = useState("");
+  const [fullNameInput, setFullNameInput] = useState<string | null>(null);
+  const [mobileNumberInput, setMobileNumberInput] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const fullName = fullNameInput ?? (profile?.fullName || profile?.name || user?.displayName || "");
+  const mobileNumber = mobileNumberInput ?? (profile?.mobileNumber || "");
 
   // Authenticated route protection
   useEffect(() => {
@@ -37,16 +40,6 @@ export default function ProfilePage() {
       router.replace("/login");
     }
   }, [user, loading, router]);
-
-  // Sync state when profile loads
-  useEffect(() => {
-    if (profile) {
-      setFullName(profile.fullName || profile.name || user?.displayName || "");
-      setMobileNumber(profile.mobileNumber || "");
-    } else if (user) {
-      setFullName(user.displayName || "");
-    }
-  }, [profile, user]);
 
   if (loading || !user) {
     return (
@@ -125,9 +118,9 @@ export default function ProfilePage() {
 
       await refreshProfile();
       setSuccessMessage("Profile updated successfully!");
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Profile update error:", err);
-      setErrorMessage(err.message || "Something went wrong while saving changes.");
+      setErrorMessage(err instanceof Error ? err.message : "Something went wrong while saving changes.");
     } finally {
       setIsSaving(false);
     }
@@ -219,7 +212,7 @@ export default function ProfilePage() {
                   type="text"
                   required
                   value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
+                  onChange={(e) => setFullNameInput(e.target.value)}
                   disabled={isSaving}
                   placeholder="Krushal Hirpara"
                   className="block h-[48px] w-full rounded-[10px] border border-gray-200 bg-white pl-10 pr-3.5 text-[14px] text-gray-900 placeholder:text-gray-400 transition-colors focus:border-[#7C5CFC] focus:outline-none focus:ring-2 focus:ring-[#7C5CFC]/20 disabled:opacity-60 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:placeholder:text-gray-500"
@@ -272,7 +265,7 @@ export default function ProfilePage() {
                   type="tel"
                   required
                   value={mobileNumber}
-                  onChange={(e) => setMobileNumber(e.target.value)}
+                  onChange={(e) => setMobileNumberInput(e.target.value)}
                   disabled={isSaving}
                   placeholder="e.g. 9876543210 or +91 98765 43210"
                   className="block h-[48px] w-full rounded-[10px] border border-gray-200 bg-white pl-10 pr-3.5 text-[14px] text-gray-900 placeholder:text-gray-400 transition-colors focus:border-[#7C5CFC] focus:outline-none focus:ring-2 focus:ring-[#7C5CFC]/20 disabled:opacity-60 dark:border-white/10 dark:bg-white/[0.04] dark:text-white dark:placeholder:text-gray-500"

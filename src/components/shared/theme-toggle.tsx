@@ -1,33 +1,34 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useSyncExternalStore } from "react";
 import { Sun, Moon } from "lucide-react";
 
-export function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+function subscribe(callback: () => void) {
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
 
-  useEffect(() => {
-    // Check saved theme preference or default to light mode
-    const savedTheme = localStorage.getItem("autoclipp-theme");
-    if (savedTheme === "dark") {
-      setTheme("dark");
-      document.documentElement.classList.add("dark");
-    } else {
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
+function getSnapshot() {
+  if (typeof window === "undefined") return "light";
+  return localStorage.getItem("autoclipp-theme") || "light";
+}
+
+function getServerSnapshot() {
+  return "light";
+}
+
+export function ThemeToggle() {
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const toggleTheme = () => {
-    if (theme === "dark") {
-      setTheme("light");
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("autoclipp-theme", "light");
-    } else {
-      setTheme("dark");
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    if (nextTheme === "dark") {
       document.documentElement.classList.add("dark");
-      localStorage.setItem("autoclipp-theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
     }
+    localStorage.setItem("autoclipp-theme", nextTheme);
+    window.dispatchEvent(new Event("storage"));
   };
 
   return (

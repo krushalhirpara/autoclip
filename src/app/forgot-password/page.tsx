@@ -29,10 +29,10 @@ function ForgotPasswordForm() {
     try {
       await sendPasswordResetEmail(auth, email.trim());
       setIsSuccess(true);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Password reset error:", err);
-      // For security & friendly UX, if user-not-found we can show success or gentle message
-      if (err?.code === "auth/user-not-found") {
+      const errObj = typeof err === "object" && err !== null ? (err as { code?: string }) : {};
+      if (errObj.code === "auth/user-not-found") {
         setIsSuccess(true);
       } else {
         const friendly = getFriendlyAuthErrorMessage(err);

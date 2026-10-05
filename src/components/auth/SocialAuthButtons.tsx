@@ -128,7 +128,7 @@ export function SocialAuthButtons({
         router.push("/dashboard");
         router.refresh();
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(`Firebase ${providerName} sign-in error:`, err);
       const friendlyMessage = getFriendlyAuthErrorMessage(
         err,

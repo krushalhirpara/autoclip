@@ -1,8 +1,9 @@
-export function getFriendlyAuthErrorMessage(error: any, defaultProviderName?: string): string {
+export function getFriendlyAuthErrorMessage(error: unknown, defaultProviderName?: string): string {
   if (!error) return "An unexpected error occurred. Please try again.";
 
-  const code = error.code || "";
-  const message = error.message || "";
+  const errObj = typeof error === "object" && error !== null ? (error as { code?: string; message?: string }) : {};
+  const code = errObj.code || "";
+  const message = errObj.message || (typeof error === "string" ? error : "");
 
   switch (code) {
     case "auth/api-key-not-valid":

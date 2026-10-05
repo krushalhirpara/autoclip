@@ -77,28 +77,28 @@ export async function getSystemHealth(): Promise<SystemHealthResponse> {
   }
 
   // 3. AI Service
-  const aiStatus: "operational" = "operational";
+  const aiStatus = "operational" as const;
   const aiDesc =
     env.AI_PROVIDER === "openai"
       ? "OpenAI Whisper & GPT-4o Intelligence"
       : "Mock AI Intelligence (Development)";
 
   // 4. Video Processor
-  const videoStatus: "operational" = "operational";
+  const videoStatus = "operational" as const;
   const videoDesc =
     env.VIDEO_PROCESSOR === "ffmpeg"
       ? "FFmpeg Video Pipeline & Encoding"
       : "Mock Video Processing Pipeline (Development)";
 
   // 5. Queue & Workers
-  const queueStatus: "operational" = "operational";
+  const queueStatus = "operational" as const;
   const queueDesc =
     env.QUEUE_DRIVER === "bullmq"
       ? "BullMQ Redis Job Queue Workers"
       : "In-Memory Background Worker Pool";
 
   // 6. Authentication
-  const authStatus: "operational" = "operational";
+  const authStatus = "operational" as const;
   const authDesc = "Firebase Auth & NextAuth Session Manager";
 
   // Overall system status

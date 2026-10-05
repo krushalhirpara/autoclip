@@ -136,7 +136,7 @@ export async function POST(request: NextRequest) {
     // 3. Signup / Profile Completion Mode
     if (mode === "signup") {
       // Validate mobile number if provided
-      let formattedMobile = mobileNumber ? normalizeIndianMobile(mobileNumber) : null;
+      const formattedMobile = mobileNumber ? normalizeIndianMobile(mobileNumber) : null;
       if (mobileNumber && !isValidIndianMobile(mobileNumber)) {
         return NextResponse.json(
           { error: "Please enter a valid 10-digit Indian mobile number." },

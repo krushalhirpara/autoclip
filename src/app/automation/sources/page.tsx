@@ -1,7 +1,9 @@
 "use client";
 
-import React from "react";
-import { Video, Activity, Search, Link } from "lucide-react";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+import { Video, Activity, Search, Link as LinkIcon, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const SOURCES = [
@@ -9,8 +11,25 @@ const SOURCES = [
 ];
 
 export default function AutomationSourcesPage() {
+  const router = useRouter();
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/login");
+    }
+  }, [user, loading, router]);
+
+  if (loading || !user) {
+    return (
+      <div className="flex min-h-[calc(100vh-140px)] w-full items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-[#7C5CFC]" />
+      </div>
+    );
+  }
+
   return (
-    <div className="max-w-5xl mx-auto p-6 pt-20">
+    <div className="max-w-5xl mx-auto p-6 pt-12">
       <div className="flex justify-between items-end mb-8">
         <div>
           <h1 className="text-3xl font-bold text-[#111118] dark:text-white">Source Monitoring</h1>
@@ -19,7 +38,7 @@ export default function AutomationSourcesPage() {
           </p>
         </div>
         <Button className="rounded-full bg-gradient-to-r from-[#7C5CFC] to-[#9B7CFF] text-white">
-          <Link className="w-4 h-4 mr-2" /> Add Source
+          <LinkIcon className="w-4 h-4 mr-2" /> Add Source
         </Button>
       </div>
 
@@ -49,7 +68,7 @@ export default function AutomationSourcesPage() {
                     </div>
                   </td>
                   <td className="p-4">
-                    <span className="px-2 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-700 flex items-center w-max">
+                    <span className="px-2 py-1 text-xs font-bold rounded-full bg-emerald-100 text-emerald-700 flex items-center w-max dark:bg-emerald-500/15 dark:text-emerald-400">
                       <Activity className="w-3 h-3 mr-1" /> {source.status}
                     </span>
                   </td>
@@ -58,10 +77,10 @@ export default function AutomationSourcesPage() {
                     &quot;{source.lastVideo}&quot;
                   </td>
                   <td className="p-4 text-right">
-                    <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50">Disconnect</Button>
+                    <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/20">Disconnect</Button>
                   </td>
                 </tr>
-              )
+              );
             })}
           </tbody>
         </table>
@@ -70,10 +89,9 @@ export default function AutomationSourcesPage() {
       <div className="mt-6 p-4 rounded-xl border border-blue-200 bg-blue-50 text-blue-800 dark:bg-blue-900/20 dark:border-blue-800/30 dark:text-blue-200 text-sm flex gap-3">
         <Activity className="w-5 h-5 shrink-0" />
         <p>
-          <strong>Note:</strong> Live monitoring requires proper API webhooks configured on the provider side. This is currently simulated for demonstration.
+          <strong>Note:</strong> Live monitoring requires proper API webhooks configured on the provider side.
         </p>
       </div>
-
     </div>
   );
 }

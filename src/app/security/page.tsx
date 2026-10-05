@@ -114,7 +114,7 @@ export default function SecurityPage() {
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">5. Vulnerability Reporting</h2>
             <p>
               We welcome reports from independent security researchers. If you discover a security vulnerability in our
-              platform, please contact us immediately at <a href="mailto:security@autoclipp.local" className="text-purple-600 dark:text-[#A78BFA] underline">security@autoclipp.local</a>.
+              platform, please contact us immediately at <a href="mailto:security@autoclipp.com" className="text-purple-600 dark:text-[#A78BFA] underline">security@autoclipp.com</a>.
             </p>
           </section>
         </div>

@@ -115,7 +115,7 @@ export default function RefundPolicyPage() {
               To submit a refund inquiry, contact our dedicated billing support team with your account email and transaction receipt:
             </p>
             <div className="rounded-xl border border-gray-200 dark:border-[#27272A] bg-gray-50 dark:bg-[#141416] p-4 text-xs text-gray-900 dark:text-white">
-              Email: <a href="mailto:billing@autoclipp.local" className="text-purple-600 dark:text-[#A78BFA] underline">billing@autoclipp.local</a>
+              Email: <a href="mailto:billing@autoclipp.com" className="text-purple-600 dark:text-[#A78BFA] underline">billing@autoclipp.com</a>
               <br />
               Response Time: Typically within 24 hours (Monday–Friday).
             </div>
