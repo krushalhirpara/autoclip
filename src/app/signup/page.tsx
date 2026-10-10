@@ -34,12 +34,18 @@ function SignupForm() {
   // State for Google/Apple onboarding modal
   const [onboardingData, setOnboardingData] = useState<OnboardingData | null>(null);
 
-  // Authenticated route protection: Logged-in users redirect to /dashboard
+  const rawRedirect = searchParams.get("redirect") || searchParams.get("returnUrl");
+  const targetDestination =
+    rawRedirect && rawRedirect.startsWith("/") && !rawRedirect.startsWith("//") && !rawRedirect.includes("\\")
+      ? rawRedirect
+      : "/dashboard";
+
+  // Authenticated route protection: Logged-in users redirect to intended target or /dashboard
   useEffect(() => {
     if (!loading && user && !onboardingData) {
-      router.replace("/dashboard");
+      router.replace(targetDestination);
     }
-  }, [user, loading, router, onboardingData]);
+  }, [user, loading, router, onboardingData, targetDestination]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,8 +120,8 @@ function SignupForm() {
 
       await refreshProfile();
 
-      // 4. Redirect to dashboard
-      router.push("/dashboard");
+      // 4. Redirect to target destination
+      router.push(targetDestination);
       router.refresh();
     } catch (err: unknown) {
       console.error("Signup submission error:", err);
@@ -332,7 +338,7 @@ function SignupForm() {
       <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
         Already have an account?{" "}
         <Link
-          href="/login"
+          href={rawRedirect ? `/login?redirect=${encodeURIComponent(rawRedirect)}` : "/login"}
           className="font-semibold text-gray-900 hover:text-[#7C5CFC] dark:text-white dark:hover:text-[#7C5CFC] transition-colors focus:outline-none focus-visible:underline"
         >
           Sign in
@@ -350,7 +356,7 @@ function SignupForm() {
           provider={onboardingData.provider}
           onComplete={async () => {
             await refreshProfile();
-            router.push("/dashboard");
+            router.push(targetDestination);
             router.refresh();
           }}
         />

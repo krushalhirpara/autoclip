@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, ChevronRight, Play, Star, ShieldCheck, Zap, Activity, Cpu, Layers, Scissors, FileText, Crop, Film, Sliders, Mic, Video, UserCheck, Building2, Briefcase } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap, Mic } from "lucide-react";
+import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
 
 export default function Page() {
   return (
@@ -16,9 +16,9 @@ export default function Page() {
         <div className="mb-12 mt-8 flex items-center space-x-2 text-xs font-semibold tracking-wide text-[#6B6B78] dark:text-[#A1A1AA]">
           <Link href="/" className="hover:text-[#7C5CFC] dark:hover:text-white transition-colors">Home</Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="capitalize">{String("Solutions")}</span>
+          <span>Solutions</span>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-[#111118] dark:text-white">{String("For Podcasters")}</span>
+          <span className="text-[#111118] dark:text-white">For Podcasters</span>
         </div>
 
         {/* HERO SECTION */}
@@ -26,21 +26,19 @@ export default function Page() {
           <div className="flex-1 text-center lg:text-left">
             <div className="inline-flex items-center space-x-2 rounded-full border border-[#7C5CFC]/25 bg-[#F4F3FF] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#7C5CFC] shadow-sm dark:border-[#27272A] dark:bg-[#1B1B1F] dark:text-[#A78BFA]">
               <Zap className="h-3.5 w-3.5" />
-              <span>{String("Solutions")}</span>
+              <span>Solutions</span>
             </div>
             <h1 className="mt-8 text-4xl font-black tracking-tight text-[#111118] dark:text-white sm:text-6xl lg:text-[4rem] lg:leading-[1.1]">
-              {String("For Podcasters")}
+              For Podcasters
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-[#6B6B78] dark:text-[#A1A1AA] mx-auto lg:mx-0">
-              {String("Transform your 1-hour podcast episodes into a month worth of viral TikToks and YouTube Shorts.")}
+              Transform your 1-hour podcast episodes into a month of viral TikToks and YouTube Shorts.
             </p>
             
             <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="rounded-full bg-gradient-to-r from-[#7C5CFC] to-[#9B7CFF] px-8 text-base font-bold text-white shadow-[0_4px_20px_rgba(124,92,252,0.4)] hover:shadow-[0_8px_30px_rgba(124,92,252,0.6)] transition-all duration-300 hover:-translate-y-1" asChild>
-                <Link href="{String('/signup')}">
-                  {String("Grow Your Podcast")} <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+              <SmartCtaButton targetRoute="/uploads" variant="primary" size="lg">
+                Grow Your Podcast
+              </SmartCtaButton>
             </div>
             
             {/* Social Proof / Trust */}
@@ -76,22 +74,19 @@ export default function Page() {
                    </div>
                  </div>
                  <div className="flex-1 flex items-center justify-center relative p-8">
-                   {/* DYNAMIC FAKE DASHBOARD CONTENT */}
-                   
-      <div className="w-full flex flex-col items-center justify-center space-y-4">
-        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center shadow-lg">
-          <Mic className="w-8 h-8 text-white" />
-        </div>
-        <div className="flex space-x-1 items-end h-8">
-           <div className="w-1 h-3 bg-[#7C5CFC] rounded-full animate-pulse"></div>
-           <div className="w-1 h-6 bg-[#7C5CFC] rounded-full animate-pulse delay-75"></div>
-           <div className="w-1 h-8 bg-[#7C5CFC] rounded-full animate-pulse delay-150"></div>
-           <div className="w-1 h-5 bg-[#7C5CFC] rounded-full animate-pulse delay-75"></div>
-           <div className="w-1 h-2 bg-[#7C5CFC] rounded-full animate-pulse"></div>
-        </div>
-        <div className="text-sm font-bold text-[#111118] dark:text-white">1hr Episode → 15 Viral Shorts</div>
-      </div>
-    
+                    <div className="w-full flex flex-col items-center justify-center space-y-4">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-red-500 flex items-center justify-center shadow-lg">
+                        <Mic className="w-8 h-8 text-white" />
+                      </div>
+                      <div className="flex space-x-1 items-end h-8">
+                         <div className="w-1 h-3 bg-[#7C5CFC] rounded-full animate-pulse"></div>
+                         <div className="w-1 h-6 bg-[#7C5CFC] rounded-full animate-pulse delay-75"></div>
+                         <div className="w-1 h-8 bg-[#7C5CFC] rounded-full animate-pulse delay-150"></div>
+                         <div className="w-1 h-5 bg-[#7C5CFC] rounded-full animate-pulse delay-75"></div>
+                         <div className="w-1 h-2 bg-[#7C5CFC] rounded-full animate-pulse"></div>
+                      </div>
+                      <div className="text-sm font-bold text-[#111118] dark:text-white">1hr Episode → 15 Viral Shorts</div>
+                    </div>
                  </div>
               </div>
             </div>
@@ -123,14 +118,14 @@ export default function Page() {
           </div>
         </div>
         
-        {/* UNIQUE BENEFITS (BENTO GRID) */}
+        {/* UNIQUE BENEFITS */}
         <div className="mt-32">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-extrabold text-[#111118] dark:text-white sm:text-4xl">Engineered for Excellence</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[{"title":"Multi-Speaker Layouts","desc":"Automatically arrange 2 or 3 speakers into split-screen layouts perfect for vertical video."},{"title":"Silence Removal","desc":"Automatically cut out dead air, \"ums\", and \"ahs\" to keep the pace punchy."},{"title":"Brand Consistency","desc":"Save your podcast colors, fonts, and logos as a preset to apply to every generated clip."}].map((benefit, idx) => (
+            {[{"title":"Multi-Speaker Layouts","desc":"Automatically arrange 2 or 3 speakers into split-screen layouts perfect for vertical video."},{"title":"Silence Removal","desc":"Automatically cut out dead air, um's, and ah's to keep the pace punchy."},{"title":"Brand Consistency","desc":"Save your podcast colors, fonts, and logos as a preset to apply to every generated clip."}].map((benefit, idx) => (
               <div key={idx} className="rounded-3xl border border-[#E8E7F0] bg-white p-8 shadow-sm dark:border-[#27272A] dark:bg-[#141416]">
                 <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center mb-6">
                   <CheckCircle2 className="h-6 w-6 text-[#7C5CFC]" />
@@ -150,11 +145,9 @@ export default function Page() {
             Ready to upgrade your workflow?
           </h2>
           <div className="relative z-10 mt-10 flex justify-center">
-            <Button size="lg" className="rounded-full bg-white px-10 py-7 text-lg font-bold text-[#111118] hover:bg-gray-100 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-105 transition-all duration-300" asChild>
-              <Link href="{String('/signup')}">
-                {String("Grow Your Podcast")}
-              </Link>
-            </Button>
+            <SmartCtaButton targetRoute="/uploads" variant="white" size="lg">
+              Grow Your Podcast
+            </SmartCtaButton>
           </div>
         </div>
 

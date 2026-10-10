@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { auth, googleProvider, appleProvider } from "@/lib/firebase";
 import { getFriendlyAuthErrorMessage } from "@/lib/firebase-errors";
@@ -29,6 +29,13 @@ export function SocialAuthButtons({
   disabled,
 }: SocialAuthButtonsProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const rawRedirect = searchParams.get("redirect") || searchParams.get("returnUrl");
+  const targetDestination =
+    rawRedirect && rawRedirect.startsWith("/") && !rawRedirect.startsWith("//") && !rawRedirect.includes("\\")
+      ? rawRedirect
+      : "/dashboard";
+
   const [loadingProvider, setLoadingProvider] = useState<"google" | "apple" | null>(null);
 
   const handleSocialLogin = async (providerName: "google" | "apple") => {
@@ -77,7 +84,7 @@ export function SocialAuthButtons({
           });
 
           if (sessionRes.ok) {
-            router.push("/dashboard");
+            router.push(targetDestination);
             router.refresh();
             return;
           }
@@ -124,8 +131,8 @@ export function SocialAuthButtons({
           return;
         }
 
-        // Successful login -> Redirect to dashboard
-        router.push("/dashboard");
+        // Successful login -> Redirect to targetDestination
+        router.push(targetDestination);
         router.refresh();
       }
     } catch (err: unknown) {

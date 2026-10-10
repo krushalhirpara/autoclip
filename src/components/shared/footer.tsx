@@ -78,28 +78,28 @@ export function Footer() {
             <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-900 dark:text-white">Product</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/#features" className="hover:text-gray-900 dark:text-white transition-colors">
+                <Link href="/get-started" className="hover:text-purple-600 dark:text-[#A78BFA] font-medium transition-colors">
+                  Get Started & Features
+                </Link>
+              </li>
+              <li>
+                <Link href="/features/ai-clipping" className="hover:text-gray-900 dark:text-white transition-colors">
                   AI Moment Detection
                 </Link>
               </li>
               <li>
-                <Link href="/#features" className="hover:text-gray-900 dark:text-white transition-colors">
+                <Link href="/features/smart-reframe" className="hover:text-gray-900 dark:text-white transition-colors">
                   Auto 9:16 Reframing
                 </Link>
               </li>
               <li>
-                <Link href="/#features" className="hover:text-gray-900 dark:text-white transition-colors">
-                  Animated Word Subtitles
+                <Link href="/features/ai-captions" className="hover:text-gray-900 dark:text-white transition-colors">
+                  Animated Dynamic Subtitles
                 </Link>
               </li>
               <li>
-                <Link href="/#clip-preview" className="hover:text-gray-900 dark:text-white transition-colors">
-                  Virality Score Matrix
-                </Link>
-              </li>
-              <li>
-                <Link href="/#architecture" className="hover:text-gray-900 dark:text-white transition-colors">
-                  Cloudflare R2 & S3
+                <Link href="/pricing" className="hover:text-gray-900 dark:text-white transition-colors">
+                  Pricing & Credit Passes
                 </Link>
               </li>
             </ul>

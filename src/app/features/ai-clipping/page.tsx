@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, ChevronRight, Play, Star, ShieldCheck, Zap, Activity, Cpu, Layers, Scissors, FileText, Crop, Film, Sliders, Mic, Video, UserCheck, Building2, Briefcase } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap, Scissors } from "lucide-react";
+import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
 
 export default function Page() {
   return (
@@ -16,9 +16,9 @@ export default function Page() {
         <div className="mb-12 mt-8 flex items-center space-x-2 text-xs font-semibold tracking-wide text-[#6B6B78] dark:text-[#A1A1AA]">
           <Link href="/" className="hover:text-[#7C5CFC] dark:hover:text-white transition-colors">Home</Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="capitalize">{String("Product")}</span>
+          <span>Product</span>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-[#111118] dark:text-white">{String("AI Video Clipping")}</span>
+          <span className="text-[#111118] dark:text-white">AI Video Clipping</span>
         </div>
 
         {/* HERO SECTION */}
@@ -26,21 +26,19 @@ export default function Page() {
           <div className="flex-1 text-center lg:text-left">
             <div className="inline-flex items-center space-x-2 rounded-full border border-[#7C5CFC]/25 bg-[#F4F3FF] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#7C5CFC] shadow-sm dark:border-[#27272A] dark:bg-[#1B1B1F] dark:text-[#A78BFA]">
               <Zap className="h-3.5 w-3.5" />
-              <span>{String("Product")}</span>
+              <span>Core Intelligence</span>
             </div>
             <h1 className="mt-8 text-4xl font-black tracking-tight text-[#111118] dark:text-white sm:text-6xl lg:text-[4rem] lg:leading-[1.1]">
-              {String("AI Video Clipping")}
+              AI Video Clipping
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-[#6B6B78] dark:text-[#A1A1AA] mx-auto lg:mx-0">
-              {String("AutoClipp's proprietary AI automatically identifies the most engaging hooks and viral moments in your long-form videos.")}
+              AutoClipp&apos;s proprietary AI automatically identifies the most engaging hooks and viral moments in your long-form videos.
             </p>
             
             <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="rounded-full bg-gradient-to-r from-[#7C5CFC] to-[#9B7CFF] px-8 text-base font-bold text-white shadow-[0_4px_20px_rgba(124,92,252,0.4)] hover:shadow-[0_8px_30px_rgba(124,92,252,0.6)] transition-all duration-300 hover:-translate-y-1" asChild>
-                <Link href="{String('/signup')}">
-                  {String("Create Your First Clip")} <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+              <SmartCtaButton targetRoute="/uploads" variant="primary" size="lg">
+                Create Your First Clip
+              </SmartCtaButton>
             </div>
             
             {/* Social Proof / Trust */}
@@ -72,25 +70,22 @@ export default function Page() {
                      <div className="w-3 h-3 rounded-full bg-green-400"></div>
                    </div>
                    <div className="mx-auto rounded-md bg-black/5 dark:bg-white/5 px-4 py-1 text-[10px] font-mono text-[#6B6B78] dark:text-[#A1A1AA]">
-                     autoclipp.com/studio
+                     autoclipp.com/uploads
                    </div>
                  </div>
                  <div className="flex-1 flex items-center justify-center relative p-8">
-                   {/* DYNAMIC FAKE DASHBOARD CONTENT */}
-                   
-      <div className="w-full flex flex-col space-y-4">
-        <div className="h-32 w-full bg-[#111118] rounded-xl flex items-center justify-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-blue-500/10"></div>
-          <div className="h-full w-1 bg-white/20 absolute left-1/3"></div>
-          <div className="h-full w-32 bg-[#7C5CFC]/30 absolute left-1/3 border-l border-r border-[#7C5CFC]">
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#7C5CFC] text-white text-[8px] px-2 py-0.5 rounded-full font-bold">VIRAL HOOK</div>
-          </div>
-          <Scissors className="h-8 w-8 text-white/50" />
-        </div>
-        <div className="h-4 w-3/4 rounded-full bg-black/10 dark:bg-white/10"></div>
-        <div className="h-4 w-1/2 rounded-full bg-black/5 dark:bg-white/5"></div>
-      </div>
-    
+                    <div className="w-full flex flex-col space-y-4">
+                      <div className="h-32 w-full bg-[#111118] rounded-xl flex items-center justify-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-blue-500/10"></div>
+                        <div className="h-full w-1 bg-white/20 absolute left-1/3"></div>
+                        <div className="h-full w-32 bg-[#7C5CFC]/30 absolute left-1/3 border-l border-r border-[#7C5CFC]">
+                          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#7C5CFC] text-white text-[8px] px-2 py-0.5 rounded-full font-bold">VIRAL HOOK</div>
+                        </div>
+                        <Scissors className="h-8 w-8 text-white/50" />
+                      </div>
+                      <div className="h-4 w-3/4 rounded-full bg-black/10 dark:bg-white/10"></div>
+                      <div className="h-4 w-1/2 rounded-full bg-black/5 dark:bg-white/5"></div>
+                    </div>
                  </div>
               </div>
             </div>
@@ -149,11 +144,9 @@ export default function Page() {
             Ready to upgrade your workflow?
           </h2>
           <div className="relative z-10 mt-10 flex justify-center">
-            <Button size="lg" className="rounded-full bg-white px-10 py-7 text-lg font-bold text-[#111118] hover:bg-gray-100 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-105 transition-all duration-300" asChild>
-              <Link href="{String('/signup')}">
-                {String("Create Your First Clip")}
-              </Link>
-            </Button>
+            <SmartCtaButton targetRoute="/uploads" variant="white" size="lg">
+              Create Your First Clip
+            </SmartCtaButton>
           </div>
         </div>
 

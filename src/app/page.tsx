@@ -58,7 +58,7 @@ export default function HomePage() {
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link 
-            href="/signup"
+            href="/get-started"
             className={cn(
               buttonVariants({ size: "lg" }),
               "inline-flex flex-row items-center justify-center gap-2 whitespace-nowrap rounded-full px-8 font-semibold bg-gradient-to-r from-[#7C5CFC] to-[#9B7CFF] text-white shadow-[0_4px_16px_rgba(124,92,252,0.35)] hover:shadow-[0_6px_24px_rgba(124,92,252,0.55)]"
@@ -251,7 +251,7 @@ export default function HomePage() {
             </p>
             <div className="relative z-10 mt-10 flex flex-wrap items-center justify-center gap-4">
               <Link 
-                href="/signup"
+                href="/get-started"
                 className={cn(
                   buttonVariants({ size: "lg" }),
                   "inline-flex flex-row items-center justify-center whitespace-nowrap rounded-full bg-white px-8 text-[#111118] font-bold hover:bg-gray-100 shadow-[0_0_20px_rgba(255,255,255,0.2)]"

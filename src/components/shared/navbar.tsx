@@ -240,7 +240,8 @@ export function Navbar() {
     ...PRODUCT_ITEMS.map((item) => ({ ...item, category: "Product" })),
     ...SOLUTIONS_ITEMS.map((item) => ({ ...item, category: "Solutions" })),
     ...RESOURCES_ITEMS.map((item) => ({ ...item, category: "Resources" })),
-    { title: "Pricing & Plans", desc: "View SaaS credit tiers & subscriptions", href: "/#pricing", icon: Sparkles, category: "Plans" },
+    { title: "Get Started & Features", desc: "Interactive product tour & all features overview", href: "/get-started", icon: Sparkles, category: "Features" },
+    { title: "Pricing & Plans", desc: "View SaaS credit tiers & passes", href: "/pricing", icon: Sparkles, category: "Plans" },
     { title: "Security & Compliance", desc: "Data protection & AES-256 encryption", href: "/security", icon: BookOpen, category: "Legal" },
     { title: "Privacy Policy", desc: "GDPR, CCPA & video data privacy", href: "/privacy", icon: BookOpen, category: "Legal" },
   ];
@@ -817,8 +818,8 @@ export function Navbar() {
 
               {/* Mobile Direct Pricing Link */}
               <Link
-                href="/#pricing"
-                onClick={(e) => handleNavigation(e, "/#pricing")}
+                href="/pricing"
+                onClick={(e) => handleNavigation(e, "/pricing")}
                 className="flex items-center justify-between rounded-2xl border border-[#E8E7F0] bg-[#F8F9FC] px-4 py-3 text-sm font-semibold text-[#111118] hover:bg-[#F4F3FF] dark:border-white/[0.06] dark:bg-white/[0.02] dark:text-white dark:hover:bg-white/[0.06]"
               >
                 <span className="flex items-center gap-2">

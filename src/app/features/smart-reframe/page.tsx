@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, ChevronRight, Play, Star, ShieldCheck, Zap, Activity, Cpu, Layers, Scissors, FileText, Crop, Film, Sliders, Mic, Video, UserCheck, Building2, Briefcase } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap, Crop } from "lucide-react";
+import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
 
 export default function Page() {
   return (
@@ -16,31 +16,29 @@ export default function Page() {
         <div className="mb-12 mt-8 flex items-center space-x-2 text-xs font-semibold tracking-wide text-[#6B6B78] dark:text-[#A1A1AA]">
           <Link href="/" className="hover:text-[#7C5CFC] dark:hover:text-white transition-colors">Home</Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="capitalize">{String("Product")}</span>
+          <span>Product</span>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-[#111118] dark:text-white">{String("Smart Reframe")}</span>
+          <span className="text-[#111118] dark:text-white">Smart Reframe</span>
         </div>
 
         {/* HERO SECTION */}
         <div className="flex flex-col gap-16 lg:flex-row lg:items-center lg:gap-20">
           <div className="flex-1 text-center lg:text-left">
             <div className="inline-flex items-center space-x-2 rounded-full border border-[#7C5CFC]/25 bg-[#F4F3FF] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#7C5CFC] shadow-sm dark:border-[#27272A] dark:bg-[#1B1B1F] dark:text-[#A78BFA]">
-              <Zap className="h-3.5 w-3.5" />
-              <span>{String("Product")}</span>
+              <Crop className="h-3.5 w-3.5" />
+              <span>9:16 Vertical Video</span>
             </div>
             <h1 className="mt-8 text-4xl font-black tracking-tight text-[#111118] dark:text-white sm:text-6xl lg:text-[4rem] lg:leading-[1.1]">
-              {String("Smart Reframe")}
+              Smart Reframe
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-[#6B6B78] dark:text-[#A1A1AA] mx-auto lg:mx-0">
-              {String("Intelligently crop your landscape videos into perfect 9:16 vertical shorts while keeping the active speaker in frame.")}
+              Intelligently track active speakers and center them in vertical 9:16 aspect ratio for TikTok, Reels, and Shorts.
             </p>
             
             <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="rounded-full bg-gradient-to-r from-[#7C5CFC] to-[#9B7CFF] px-8 text-base font-bold text-white shadow-[0_4px_20px_rgba(124,92,252,0.4)] hover:shadow-[0_8px_30px_rgba(124,92,252,0.6)] transition-all duration-300 hover:-translate-y-1" asChild>
-                <Link href="{String('/signup')}">
-                  {String("Try Smart Reframe")} <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+              <SmartCtaButton targetRoute="/editor" variant="primary" size="lg">
+                Try Smart Reframe
+              </SmartCtaButton>
             </div>
             
             {/* Social Proof / Trust */}
@@ -72,23 +70,18 @@ export default function Page() {
                      <div className="w-3 h-3 rounded-full bg-green-400"></div>
                    </div>
                    <div className="mx-auto rounded-md bg-black/5 dark:bg-white/5 px-4 py-1 text-[10px] font-mono text-[#6B6B78] dark:text-[#A1A1AA]">
-                     autoclipp.com/studio
+                     autoclipp.com/editor
                    </div>
                  </div>
                  <div className="flex-1 flex items-center justify-center relative p-8">
-                   {/* DYNAMIC FAKE DASHBOARD CONTENT */}
-                   
-      <div className="relative w-full aspect-video bg-[#111118] rounded-xl overflow-hidden flex items-center justify-center">
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
-        {/* The 9:16 Crop Box */}
-        <div className="h-full aspect-[9/16] border-4 border-[#7C5CFC] shadow-[0_0_0_1000px_rgba(0,0,0,0.6)] flex items-center justify-center relative">
-          <div className="absolute top-2 right-2 bg-[#7C5CFC] text-white text-[8px] px-2 py-0.5 rounded-full font-bold flex items-center">
-            <Crop className="w-3 h-3 mr-1" /> REFRAMED
-          </div>
-          <div className="w-12 h-12 rounded-full border-2 border-white/50"></div>
-        </div>
-      </div>
-    
+                    <div className="w-48 h-full bg-[#111118] rounded-2xl border-2 border-[#7C5CFC] relative overflow-hidden flex items-center justify-center">
+                      <div className="absolute top-2 left-2 bg-[#7C5CFC] text-white text-[8px] font-bold px-1.5 py-0.5 rounded">
+                        9:16 AUTO-CROP
+                      </div>
+                      <div className="w-16 h-16 rounded-full bg-indigo-500/30 border border-indigo-400 flex items-center justify-center">
+                        <Crop className="h-6 w-6 text-indigo-300 animate-pulse" />
+                      </div>
+                    </div>
                  </div>
               </div>
             </div>
@@ -104,7 +97,7 @@ export default function Page() {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 relative">
             <div className="hidden lg:block absolute top-12 left-10 right-10 h-0.5 bg-gradient-to-r from-[#7C5CFC]/0 via-[#7C5CFC]/30 to-[#7C5CFC]/0 -z-10"></div>
             
-            {["Upload 16:9","Face Tracking","Active Speaker","Auto-Framing","Vertical Export"].map((step, idx, arr) => (
+            {["Input Horizontal Video","Face & Speaker Detection","Dynamic Center Tracking","Layout Splitting","Export 9:16"].map((step, idx, arr) => (
               <div key={idx} className="relative group">
                 <div className="flex flex-col items-center text-center p-6 rounded-3xl bg-white border border-[#E8E7F0] shadow-sm hover:shadow-xl hover:border-[#7C5CFC]/40 transition-all duration-300 dark:bg-[#141416] dark:border-[#27272A] dark:hover:border-[#7C5CFC]/40 z-10 h-full">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F4F3FF] text-[#7C5CFC] font-black text-lg dark:bg-[#1B1B1F] dark:text-[#A78BFA] group-hover:scale-110 group-hover:bg-[#7C5CFC] group-hover:text-white transition-all duration-300">
@@ -119,15 +112,15 @@ export default function Page() {
             ))}
           </div>
         </div>
-        
-        {/* UNIQUE BENEFITS (BENTO GRID) */}
+
+        {/* UNIQUE BENEFITS */}
         <div className="mt-32">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-extrabold text-[#111118] dark:text-white sm:text-4xl">Engineered for Excellence</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[{"title":"Active Speaker Tracking","desc":"In multi-person podcasts, the camera automatically cuts and pans to whoever is currently speaking."},{"title":"Smooth Panning","desc":"Cinematic, eased panning motions that look like they were operated by a professional cameraperson."},{"title":"Subject Lock","desc":"Ensure faces are never cut in half, keeping subjects perfectly centered at all times."}].map((benefit, idx) => (
+            {[{"title":"Active Speaker Lock","desc":"Keeps the speaker centered effortlessly even during rapid physical movements and multi-guest panels."},{"title":"Split Screen Layouts","desc":"Automatically generate stacked or side-by-side split screen views when two people talk simultaneously."},{"title":"No Manual Keyframing","desc":"Zero keyframes or tedious manual pan-and-scan editing required in Premiere or Final Cut."}].map((benefit, idx) => (
               <div key={idx} className="rounded-3xl border border-[#E8E7F0] bg-white p-8 shadow-sm dark:border-[#27272A] dark:bg-[#141416]">
                 <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center mb-6">
                   <CheckCircle2 className="h-6 w-6 text-[#7C5CFC]" />
@@ -147,11 +140,9 @@ export default function Page() {
             Ready to upgrade your workflow?
           </h2>
           <div className="relative z-10 mt-10 flex justify-center">
-            <Button size="lg" className="rounded-full bg-white px-10 py-7 text-lg font-bold text-[#111118] hover:bg-gray-100 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-105 transition-all duration-300" asChild>
-              <Link href="{String('/signup')}">
-                {String("Try Smart Reframe")}
-              </Link>
-            </Button>
+            <SmartCtaButton targetRoute="/editor" variant="white" size="lg">
+              Try Smart Reframe
+            </SmartCtaButton>
           </div>
         </div>
 

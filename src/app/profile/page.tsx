@@ -37,7 +37,7 @@ export default function ProfilePage() {
   // Authenticated route protection
   useEffect(() => {
     if (!loading && !user) {
-      router.replace("/login");
+      router.replace("/login?redirect=/profile");
     }
   }, [user, loading, router]);
 

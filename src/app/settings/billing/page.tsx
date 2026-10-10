@@ -52,7 +52,7 @@ export default function BillingPage() {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.replace("/login");
+      router.replace("/login?redirect=/settings/billing");
     }
   }, [user, loading, router]);
 

@@ -12,7 +12,7 @@ export default function SettingsPage() {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.replace("/login");
+      router.replace("/login?redirect=/settings");
     }
   }, [user, loading, router]);
 

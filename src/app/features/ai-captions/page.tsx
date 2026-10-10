@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, ChevronRight, Play, Star, ShieldCheck, Zap, Activity, Cpu, Layers, Scissors, FileText, Crop, Film, Sliders, Mic, Video, UserCheck, Building2, Briefcase } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap } from "lucide-react";
+import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
 
 export default function Page() {
   return (
@@ -16,9 +16,9 @@ export default function Page() {
         <div className="mb-12 mt-8 flex items-center space-x-2 text-xs font-semibold tracking-wide text-[#6B6B78] dark:text-[#A1A1AA]">
           <Link href="/" className="hover:text-[#7C5CFC] dark:hover:text-white transition-colors">Home</Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="capitalize">{String("Product")}</span>
+          <span>Product</span>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-[#111118] dark:text-white">{String("AI Captions")}</span>
+          <span className="text-[#111118] dark:text-white">AI Captions</span>
         </div>
 
         {/* HERO SECTION */}
@@ -26,21 +26,19 @@ export default function Page() {
           <div className="flex-1 text-center lg:text-left">
             <div className="inline-flex items-center space-x-2 rounded-full border border-[#7C5CFC]/25 bg-[#F4F3FF] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#7C5CFC] shadow-sm dark:border-[#27272A] dark:bg-[#1B1B1F] dark:text-[#A78BFA]">
               <Zap className="h-3.5 w-3.5" />
-              <span>{String("Product")}</span>
+              <span>Animated Subtitles</span>
             </div>
             <h1 className="mt-8 text-4xl font-black tracking-tight text-[#111118] dark:text-white sm:text-6xl lg:text-[4rem] lg:leading-[1.1]">
-              {String("AI Captions")}
+              AI Captions
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-[#6B6B78] dark:text-[#A1A1AA] mx-auto lg:mx-0">
-              {String("Add dynamic, highly engaging animated captions to your videos automatically. Boost viewer retention instantly.")}
+              Add dynamic, highly engaging animated captions to your videos automatically. Boost viewer retention instantly.
             </p>
             
             <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="rounded-full bg-gradient-to-r from-[#7C5CFC] to-[#9B7CFF] px-8 text-base font-bold text-white shadow-[0_4px_20px_rgba(124,92,252,0.4)] hover:shadow-[0_8px_30px_rgba(124,92,252,0.6)] transition-all duration-300 hover:-translate-y-1" asChild>
-                <Link href="{String('/signup')}">
-                  {String("Try AI Captions")} <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+              <SmartCtaButton targetRoute="/editor" variant="primary" size="lg">
+                Try AI Captions
+              </SmartCtaButton>
             </div>
             
             {/* Social Proof / Trust */}
@@ -72,25 +70,22 @@ export default function Page() {
                      <div className="w-3 h-3 rounded-full bg-green-400"></div>
                    </div>
                    <div className="mx-auto rounded-md bg-black/5 dark:bg-white/5 px-4 py-1 text-[10px] font-mono text-[#6B6B78] dark:text-[#A1A1AA]">
-                     autoclipp.com/studio
+                     autoclipp.com/editor
                    </div>
                  </div>
                  <div className="flex-1 flex items-center justify-center relative p-8">
-                   {/* DYNAMIC FAKE DASHBOARD CONTENT */}
-                   
-      <div className="w-full h-full flex items-center justify-center flex-col">
-        <div className="text-2xl font-black uppercase text-center space-y-2">
-          <div className="text-[#6B6B78] dark:text-[#A1A1AA]">HOW TO MAKE</div>
-          <div className="text-[#111118] dark:text-white text-3xl">YOUR <span className="bg-[#7C5CFC] text-white px-2 rounded-md">VIDEOS</span></div>
-          <div className="text-[#6B6B78] dark:text-[#A1A1AA]">GO VIRAL</div>
-        </div>
-        <div className="mt-8 flex gap-2">
-          <div className="w-8 h-8 rounded-full bg-red-400"></div>
-          <div className="w-8 h-8 rounded-full bg-blue-400"></div>
-          <div className="w-8 h-8 rounded-full bg-green-400 border-2 border-white dark:border-[#0A0A0C]"></div>
-        </div>
-      </div>
-    
+                    <div className="w-full h-full flex items-center justify-center flex-col">
+                      <div className="text-2xl font-black uppercase text-center space-y-2">
+                        <div className="text-[#6B6B78] dark:text-[#A1A1AA]">HOW TO MAKE</div>
+                        <div className="text-[#111118] dark:text-white text-3xl">YOUR <span className="bg-[#7C5CFC] text-white px-2 rounded-md">VIDEOS</span></div>
+                        <div className="text-[#6B6B78] dark:text-[#A1A1AA]">GO VIRAL</div>
+                      </div>
+                      <div className="mt-8 flex gap-2">
+                        <div className="w-8 h-8 rounded-full bg-red-400"></div>
+                        <div className="w-8 h-8 rounded-full bg-blue-400"></div>
+                        <div className="w-8 h-8 rounded-full bg-green-400 border-2 border-white dark:border-[#0A0A0C]"></div>
+                      </div>
+                    </div>
                  </div>
               </div>
             </div>
@@ -149,11 +144,9 @@ export default function Page() {
             Ready to upgrade your workflow?
           </h2>
           <div className="relative z-10 mt-10 flex justify-center">
-            <Button size="lg" className="rounded-full bg-white px-10 py-7 text-lg font-bold text-[#111118] hover:bg-gray-100 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-105 transition-all duration-300" asChild>
-              <Link href="{String('/signup')}">
-                {String("Try AI Captions")}
-              </Link>
-            </Button>
+            <SmartCtaButton targetRoute="/editor" variant="white" size="lg">
+              Try AI Captions
+            </SmartCtaButton>
           </div>
         </div>
 

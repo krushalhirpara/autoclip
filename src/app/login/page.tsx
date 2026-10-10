@@ -26,12 +26,18 @@ function LoginForm() {
     initialError ? decodeURIComponent(initialError) : null
   );
 
-  // Authenticated route protection: Logged-in users redirect to /dashboard
+  const rawRedirect = searchParams.get("redirect") || searchParams.get("returnUrl");
+  const targetDestination =
+    rawRedirect && rawRedirect.startsWith("/") && !rawRedirect.startsWith("//") && !rawRedirect.includes("\\")
+      ? rawRedirect
+      : "/dashboard";
+
+  // Authenticated route protection: Logged-in users redirect to intended target or /dashboard
   useEffect(() => {
     if (!loading && user) {
-      router.replace("/dashboard");
+      router.replace(targetDestination);
     }
-  }, [user, loading, router]);
+  }, [user, loading, router, targetDestination]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,8 +79,8 @@ function LoginForm() {
 
       await refreshProfile();
 
-      // 3. Redirect to dashboard
-      router.push("/dashboard");
+      // 3. Redirect to target destination
+      router.push(targetDestination);
       router.refresh();
     } catch (err: unknown) {
       console.error("Login submission error:", err);
@@ -235,7 +241,7 @@ function LoginForm() {
       <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
         Don&apos;t have an account?{" "}
         <Link
-          href="/signup"
+          href={rawRedirect ? `/signup?redirect=${encodeURIComponent(rawRedirect)}` : "/signup"}
           className="font-semibold text-gray-900 hover:text-[#7C5CFC] dark:text-white dark:hover:text-[#7C5CFC] transition-colors focus:outline-none focus-visible:underline"
         >
           Sign up

@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, ChevronRight, Play, Star, ShieldCheck, Zap, Activity, Cpu, Layers, Scissors, FileText, Crop, Film, Sliders, Mic, Video, UserCheck, Building2, Briefcase } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap, Sliders } from "lucide-react";
+import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
 
 export default function Page() {
   return (
@@ -16,31 +16,29 @@ export default function Page() {
         <div className="mb-12 mt-8 flex items-center space-x-2 text-xs font-semibold tracking-wide text-[#6B6B78] dark:text-[#A1A1AA]">
           <Link href="/" className="hover:text-[#7C5CFC] dark:hover:text-white transition-colors">Home</Link>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="capitalize">{String("Product")}</span>
+          <span>Product</span>
           <ChevronRight className="h-3.5 w-3.5" />
-          <span className="text-[#111118] dark:text-white">{String("AI Video Editor")}</span>
+          <span className="text-[#111118] dark:text-white">AI Video Editor</span>
         </div>
 
         {/* HERO SECTION */}
         <div className="flex flex-col gap-16 lg:flex-row lg:items-center lg:gap-20">
           <div className="flex-1 text-center lg:text-left">
             <div className="inline-flex items-center space-x-2 rounded-full border border-[#7C5CFC]/25 bg-[#F4F3FF] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#7C5CFC] shadow-sm dark:border-[#27272A] dark:bg-[#1B1B1F] dark:text-[#A78BFA]">
-              <Zap className="h-3.5 w-3.5" />
-              <span>{String("Product")}</span>
+              <Sliders className="h-3.5 w-3.5" />
+              <span>Timeline Studio</span>
             </div>
             <h1 className="mt-8 text-4xl font-black tracking-tight text-[#111118] dark:text-white sm:text-6xl lg:text-[4rem] lg:leading-[1.1]">
-              {String("AI Video Editor")}
+              AI Video Editor
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed text-[#6B6B78] dark:text-[#A1A1AA] mx-auto lg:mx-0">
-              {String("A powerful studio timeline to trim, adjust, and perfect your AI-generated clips before exporting.")}
+              A comprehensive browser-based video editing studio. Trim timestamps, customize viral hooks, adjust subtitles, and export vertical clips in seconds.
             </p>
             
             <div className="mt-10 flex flex-wrap gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="rounded-full bg-gradient-to-r from-[#7C5CFC] to-[#9B7CFF] px-8 text-base font-bold text-white shadow-[0_4px_20px_rgba(124,92,252,0.4)] hover:shadow-[0_8px_30px_rgba(124,92,252,0.6)] transition-all duration-300 hover:-translate-y-1" asChild>
-                <Link href="{String('/signup')}">
-                  {String("Open Clip Studio")} <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
+              <SmartCtaButton targetRoute="/editor" variant="primary" size="lg">
+                Open Video Editor
+              </SmartCtaButton>
             </div>
             
             {/* Social Proof / Trust */}
@@ -72,28 +70,19 @@ export default function Page() {
                      <div className="w-3 h-3 rounded-full bg-green-400"></div>
                    </div>
                    <div className="mx-auto rounded-md bg-black/5 dark:bg-white/5 px-4 py-1 text-[10px] font-mono text-[#6B6B78] dark:text-[#A1A1AA]">
-                     autoclipp.com/studio
+                     autoclipp.com/editor
                    </div>
                  </div>
                  <div className="flex-1 flex items-center justify-center relative p-8">
-                   {/* DYNAMIC FAKE DASHBOARD CONTENT */}
-                   
-      <div className="w-full h-full flex flex-col space-y-2">
-        {/* Fake Video Preview */}
-        <div className="flex-1 bg-[#111118] rounded-xl flex items-center justify-center relative">
-          <Play className="w-8 h-8 text-white/50" />
-        </div>
-        {/* Fake Timeline */}
-        <div className="h-16 bg-black/5 dark:bg-white/5 rounded-xl border border-black/10 dark:border-white/10 p-2 flex flex-col justify-between">
-          <div className="h-3 w-full bg-[#7C5CFC]/20 rounded-sm overflow-hidden flex">
-            <div className="w-1/4 h-full border-r border-[#7C5CFC]/40"></div>
-            <div className="w-1/2 h-full bg-[#7C5CFC]/50"></div>
-            <div className="w-1/4 h-full border-l border-[#7C5CFC]/40"></div>
-          </div>
-          <div className="h-3 w-3/4 bg-blue-500/20 rounded-sm"></div>
-        </div>
-      </div>
-    
+                    <div className="w-full flex flex-col space-y-3">
+                      <div className="h-8 w-full bg-purple-500/20 rounded-lg flex items-center px-3 justify-between">
+                        <span className="text-[10px] font-mono text-purple-300">TIMELINE: 00:15 - 00:48</span>
+                        <Sliders className="h-3.5 w-3.5 text-purple-400" />
+                      </div>
+                      <div className="h-20 w-full bg-[#111118] rounded-xl flex items-center justify-center">
+                        <span className="text-xs font-mono text-gray-400">Word Sync Caption Engine</span>
+                      </div>
+                    </div>
                  </div>
               </div>
             </div>
@@ -109,7 +98,7 @@ export default function Page() {
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 relative">
             <div className="hidden lg:block absolute top-12 left-10 right-10 h-0.5 bg-gradient-to-r from-[#7C5CFC]/0 via-[#7C5CFC]/30 to-[#7C5CFC]/0 -z-10"></div>
             
-            {["Transcript Edit","Timeline Adjust","Captions Tune","Reframe Check","Final Export"].map((step, idx, arr) => (
+            {["Select Generated Moment","Fine-tune Cut Points","Edit Headline & Hooks","Choose Subtitle Presets","Instant Render"].map((step, idx, arr) => (
               <div key={idx} className="relative group">
                 <div className="flex flex-col items-center text-center p-6 rounded-3xl bg-white border border-[#E8E7F0] shadow-sm hover:shadow-xl hover:border-[#7C5CFC]/40 transition-all duration-300 dark:bg-[#141416] dark:border-[#27272A] dark:hover:border-[#7C5CFC]/40 z-10 h-full">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F4F3FF] text-[#7C5CFC] font-black text-lg dark:bg-[#1B1B1F] dark:text-[#A78BFA] group-hover:scale-110 group-hover:bg-[#7C5CFC] group-hover:text-white transition-all duration-300">
@@ -124,15 +113,15 @@ export default function Page() {
             ))}
           </div>
         </div>
-        
-        {/* UNIQUE BENEFITS (BENTO GRID) */}
+
+        {/* UNIQUE BENEFITS */}
         <div className="mt-32">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-extrabold text-[#111118] dark:text-white sm:text-4xl">Engineered for Excellence</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[{"title":"Text-Based Editing","desc":"Edit your video by simply deleting text from the transcript. The video cuts automatically."},{"title":"Multi-Track Timeline","desc":"Fine-tune audio, add background music, or adjust B-roll on a professional timeline."},{"title":"Cloud Rendering","desc":"Export 4K videos directly from the browser without slowing down your computer."}].map((benefit, idx) => (
+            {[{"title":"Cloud-Powered Rendering","desc":"Render clips in the background on high-performance GPU workers without taxing your local computer."},{"title":"Accurate Waveform Scrubbing","desc":"Zoom into milliseconds with precise audio-waveform visualization to catch the exact start of spoken words."},{"title":"Batch Timeline Export","desc":"Queue up 20 clips simultaneously and download them all as a single zip or publish to TikTok."}].map((benefit, idx) => (
               <div key={idx} className="rounded-3xl border border-[#E8E7F0] bg-white p-8 shadow-sm dark:border-[#27272A] dark:bg-[#141416]">
                 <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center mb-6">
                   <CheckCircle2 className="h-6 w-6 text-[#7C5CFC]" />
@@ -152,11 +141,9 @@ export default function Page() {
             Ready to upgrade your workflow?
           </h2>
           <div className="relative z-10 mt-10 flex justify-center">
-            <Button size="lg" className="rounded-full bg-white px-10 py-7 text-lg font-bold text-[#111118] hover:bg-gray-100 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-105 transition-all duration-300" asChild>
-              <Link href="{String('/signup')}">
-                {String("Open Clip Studio")}
-              </Link>
-            </Button>
+            <SmartCtaButton targetRoute="/editor" variant="white" size="lg">
+              Open Video Editor
+            </SmartCtaButton>
           </div>
         </div>
 
