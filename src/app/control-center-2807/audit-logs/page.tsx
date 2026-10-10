@@ -11,13 +11,23 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+interface AuditLogMetadata {
+  actor?: string;
+  ip?: string;
+  reason?: string;
+  targetEmail?: string;
+  note?: string;
+  filename?: string;
+  [key: string]: unknown;
+}
+
 interface AuditLogRecord {
   id: string;
   action: string;
   fullAction: string;
   entityType: string;
   entityId: string | null;
-  metadata: Record<string, unknown> | null;
+  metadata: AuditLogMetadata | null;
   targetUser?: {
     id: string;
     name: string | null;
@@ -202,9 +212,9 @@ export default function AdminAuditLogsPage() {
                   <tr key={log.id} className="hover:bg-slate-800/40 transition-colors">
                     <td className="py-3 px-4 font-sans">{getActionBadge(log.action)}</td>
                     <td className="py-3 px-4 text-slate-300 font-sans font-medium">
-                      {log.metadata?.actor || "System"}
+                      {String(log.metadata?.actor || "System")}
                     </td>
-                    <td className="py-3 px-4 text-slate-400">{log.metadata?.ip || "127.0.0.1"}</td>
+                    <td className="py-3 px-4 text-slate-400">{String(log.metadata?.ip || "127.0.0.1")}</td>
                     <td className="py-3 px-4 text-slate-300 font-sans">
                       {Boolean(log.metadata?.reason) && (
                         <div>
