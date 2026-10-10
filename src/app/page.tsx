@@ -184,7 +184,9 @@ export default function HomePage() {
                 <li className="flex items-center"><CheckCircle2 className="mr-3 h-4 w-4 text-[#059669]" /> Basic subtitle templates</li>
                 <li className="flex items-center text-[#6B6B78] dark:text-[#A1A1AA] opacity-50"><CheckCircle2 className="mr-3 h-4 w-4" /> No brand kits</li>
               </ul>
-              <Button variant="outline" className="mt-8 w-full rounded-xl border-[#E8E7F0] dark:border-[#27272A]">Get Started</Button>
+              <Button variant="outline" className="mt-8 w-full rounded-xl border-[#E8E7F0] dark:border-[#27272A]" asChild>
+                <Link href="/pricing">Get Started</Link>
+              </Button>
             </div>
 
             {/* Pro Plan */}
@@ -206,7 +208,9 @@ export default function HomePage() {
                 <li className="flex items-center"><CheckCircle2 className="mr-3 h-4 w-4 text-[#059669]" /> AI B-Roll & Visual Hook overlays</li>
                 <li className="flex items-center"><CheckCircle2 className="mr-3 h-4 w-4 text-[#059669]" /> Remove AutoClipp watermark</li>
               </ul>
-              <Button className="mt-8 w-full rounded-xl bg-[#7C5CFC] text-white hover:bg-[#6A4BE5]">Upgrade to Pro</Button>
+              <Button className="mt-8 w-full rounded-xl bg-[#7C5CFC] text-white hover:bg-[#6A4BE5]" asChild>
+                <Link href="/pricing">Upgrade to Pro</Link>
+              </Button>
             </div>
 
             {/* Enterprise Plan */}
@@ -225,7 +229,9 @@ export default function HomePage() {
                 <li className="flex items-center"><CheckCircle2 className="mr-3 h-4 w-4 text-[#059669]" /> Custom SSO integration</li>
                 <li className="flex items-center"><CheckCircle2 className="mr-3 h-4 w-4 text-[#059669]" /> Dedicated Slack support channel</li>
               </ul>
-              <Button variant="outline" className="mt-8 w-full rounded-xl border-[#E8E7F0] dark:border-[#27272A]">Contact Sales</Button>
+              <Button variant="outline" className="mt-8 w-full rounded-xl border-[#E8E7F0] dark:border-[#27272A]" asChild>
+                <Link href="/pricing">Buy Agency Plan</Link>
+              </Button>
             </div>
           </div>
         </section>

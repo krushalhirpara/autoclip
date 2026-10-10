@@ -22,3 +22,5 @@ export function getPaymentService(): IPaymentService {
 }
 
 export * from "./payments.interface";
+export * from "./plans";
+export * from "./paypal.service";

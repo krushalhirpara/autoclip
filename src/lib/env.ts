@@ -27,9 +27,15 @@ const envSchema = z.object({
   OPENAI_WHISPER_MODEL: z.string().default("whisper-1"),
 
   // Payments
-  PAYMENT_PROVIDER: z.enum(["mock", "stripe"]).default("mock"),
+  PAYMENT_PROVIDER: z.enum(["mock", "stripe", "paypal"]).default("paypal"),
   STRIPE_SECRET_KEY: z.string().optional(),
   STRIPE_WEBHOOK_SECRET: z.string().optional(),
+  PAYPAL_CLIENT_ID: z.string().optional(),
+  PAYPAL_CLIENT_SECRET: z.string().optional(),
+  PAYPAL_WEBHOOK_ID: z.string().optional(),
+  PAYPAL_ENVIRONMENT: z.enum(["sandbox", "live"]).default("sandbox"),
+  PAYPAL_SUBSCRIPTIONS_ENABLED: z.enum(["true", "false"]).default("false"),
+  NEXT_PUBLIC_PAYPAL_CLIENT_ID: z.string().optional(),
 
   // Video Processor
   VIDEO_PROCESSOR: z.enum(["mock", "ffmpeg"]).default("mock"),

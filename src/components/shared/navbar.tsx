@@ -563,8 +563,7 @@ export function Navbar() {
 
             {/* Pricing Direct Link */}
             <Link
-              href="/#pricing"
-              onClick={(e) => handleNavigation(e, "/#pricing")}
+              href="/pricing"
               className="rounded-full px-3.5 py-1.5 text-xs font-semibold text-[#6B6B78] transition-all duration-200 hover:bg-[#F4F3FF] hover:text-[#7C5CFC] dark:text-[#A1A1AA] dark:hover:bg-[#7C5CFC]/15 dark:hover:text-white"
             >
               Pricing
@@ -642,12 +641,12 @@ export function Navbar() {
                         <span>Settings</span>
                       </Link>
                       <Link
-                        href="/#pricing"
-                        onClick={(e) => handleNavigation(e, "/#pricing")}
+                        href="/settings/billing"
+                        onClick={(e) => handleNavigation(e, "/settings/billing")}
                         className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium text-gray-700 hover:bg-[#F4F3FF] hover:text-[#7C5CFC] dark:text-gray-200 dark:hover:bg-white/[0.07] transition-colors"
                       >
                         <Sparkles className="h-4 w-4 text-[#7C5CFC]" />
-                        <span>Billing</span>
+                        <span>Billing & Invoices</span>
                       </Link>
                       <div className="border-t border-gray-100 dark:border-white/5 my-1" />
                       <button

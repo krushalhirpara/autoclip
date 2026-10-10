@@ -92,7 +92,7 @@ export default function SettingsPage() {
 
           {/* Billing & Subscriptions */}
           <Link
-            href="/#pricing"
+            href="/settings/billing"
             className="flex items-center justify-between p-5 transition-colors hover:bg-gray-50/80 dark:hover:bg-white/[0.02]"
           >
             <div className="flex items-center gap-4">

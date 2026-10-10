@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { Scissors, LogOut, User, Mail, Phone, Edit3, Loader2, ArrowRight } from "lucide-react";
+import { Scissors, LogOut, User, Mail, Phone, Edit3, Loader2, ArrowRight, Zap } from "lucide-react";
 
 export default function Dashboard() {
   const { user, profile, loading, logout } = useAuth();
@@ -125,6 +125,58 @@ export default function Dashboard() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Billing & Subscription Summary Card */}
+        <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#121216]">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 dark:border-white/5 pb-4 mb-6">
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#7C5CFC]/10 text-[#7C5CFC]">
+                <Zap className="h-6 w-6" />
+              </div>
+              <div>
+                <h2 className="text-base font-semibold text-gray-900 dark:text-white">
+                  Plan & Processing Credits
+                </h2>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Instant processing minutes powered by PayPal Business
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <Link
+                href="/settings/billing"
+                className="inline-flex items-center justify-center rounded-[10px] border border-gray-200 bg-white px-3.5 py-2 text-xs font-semibold text-gray-700 shadow-sm hover:bg-gray-50 dark:border-white/10 dark:bg-white/[0.04] dark:text-gray-200 dark:hover:bg-white/[0.08]"
+              >
+                Invoices & History
+              </Link>
+              <Link
+                href="/pricing"
+                className="inline-flex items-center justify-center gap-1.5 rounded-[10px] bg-[#7C5CFC] px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-[#6D49F0] transition-all"
+              >
+                <Zap className="h-3.5 w-3.5" />
+                <span>Upgrade / Refill</span>
+              </Link>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-between rounded-xl bg-gradient-to-r from-purple-50 to-indigo-50/50 p-5 dark:from-[#1A1828] dark:to-[#151420] border border-purple-100 dark:border-purple-900/30">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#7C5CFC] dark:text-[#A78BFA]">
+                Available Video Processing Balance
+              </p>
+              <div className="mt-1 flex items-baseline gap-2">
+                <span className="text-3xl font-black text-gray-900 dark:text-white">
+                  {profile?.credits ?? 60}
+                </span>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">Minutes</span>
+              </div>
+            </div>
+            <p className="mt-3 sm:mt-0 text-xs text-gray-500 dark:text-gray-400 max-w-xs text-right">
+              Use credits for AI transcriptions, smart clip extraction, vertical reframing, and ultra-HD rendering.
+            </p>
           </div>
         </div>
 

@@ -28,6 +28,14 @@ enum SubscriptionStatus {
   UNPAID
 }
 
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
 enum CreditTransactionType {
   PURCHASE
   USAGE
@@ -142,6 +150,7 @@ model User {
   subscription       Subscription?
   creditBalance      CreditBalance?
   creditTransactions CreditTransaction[]
+  paymentRecords     PaymentRecord[]
   projects           Project[]
   videos             Video[]
   brandKits          BrandKit[]
@@ -183,6 +192,11 @@ model Subscription {
   user                 User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   status               SubscriptionStatus @default(INACTIVE)
   planId               String             @default("free")
+  billingInterval      String?            @default("month")
+  provider             String             @default("paypal")
+  paypalSubscriptionId String?            @unique
+  paypalPayerId        String?
+  paypalPlanId         String?
   stripeCustomerId     String?            @unique
   stripeSubscriptionId String?            @unique
   stripePriceId        String?
@@ -193,6 +207,7 @@ model Subscription {
   updatedAt            DateTime           @updatedAt
 
   @@index([userId])
+  @@index([paypalSubscriptionId])
   @@index([stripeCustomerId])
 }
 
@@ -224,6 +239,50 @@ model CreditTransaction {
 
   @@index([userId])
   @@index([creditBalanceId])
+}
+
+model PaymentRecord {
+  id              String        @id @default(cuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider        String        @default("PAYPAL") // "PAYPAL", "STRIPE", "MOCK"
+  orderId         String        @unique
+  captureId       String?       @unique
+  status          PaymentStatus @default(PENDING)
+  planId          String        // "starter", "pro", "agency"
+  billingInterval String?       // "month", "year", "one_time"
+  amount          Decimal       @db.Decimal(10, 2)
+  currency        String        @default("USD")
+  creditsGranted  Int           @default(0)
+  payerEmail      String?
+  payerName       String?
+  payerId         String?
+  customId        String?
+  rawResponse     Json?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([orderId])
+  @@index([captureId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model WebhookEvent {
+  id          String   @id @default(cuid())
+  provider    String   @default("PAYPAL") // "PAYPAL", "STRIPE"
+  eventId     String   @unique
+  eventType   String
+  summary     String?
+  status      String   @default("PROCESSED")
+  payload     Json?
+  processedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  @@index([eventId])
+  @@index([provider])
+  @@index([eventType])
 }
 
 // --------------------------------------------------------
