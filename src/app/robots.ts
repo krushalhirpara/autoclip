@@ -16,6 +16,8 @@ export default function robots(): MetadataRoute.Robots {
           "/publishing",
           "/automation",
           "/api/",
+          "/control-center-2807",
+          "/control-center-2807/",
         ],
       },
     ],

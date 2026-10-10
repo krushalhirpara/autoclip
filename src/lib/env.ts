@@ -42,6 +42,11 @@ const envSchema = z.object({
   FFMPEG_PATH: z.string().optional(),
   FFPROBE_PATH: z.string().optional(),
 
+  // Admin & Control Center
+  ADMIN_USERNAME: z.string().optional(),
+  ADMIN_PASSWORD_HASH: z.string().optional(),
+  ADMIN_SESSION_SECRET: z.string().optional(),
+
   // Logging
   LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("debug"),
 });

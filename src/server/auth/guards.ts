@@ -2,11 +2,32 @@ import { getSession, SessionUser } from "./auth.config";
 import { ForbiddenError, NotFoundError, UnauthorizedError } from "@/core/errors/app-error";
 import { prisma } from "../db/prisma";
 
+export async function isUserSuspended(userId: string): Promise<boolean> {
+  const latestSuspensionLog = await prisma.usageLog.findFirst({
+    where: {
+      userId,
+      action: {
+        in: ["ADMIN_SUSPEND_USER", "ADMIN_REACTIVATE_USER"],
+      },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return latestSuspensionLog?.action === "ADMIN_SUSPEND_USER";
+}
+
 export async function requireUser(): Promise<SessionUser> {
   const session = await getSession();
   if (!session || !session.user) {
     throw new UnauthorizedError("You must be logged in to perform this action");
   }
+
+  // Enforce server-side suspension check
+  const suspended = await isUserSuspended(session.user.id);
+  if (suspended) {
+    throw new ForbiddenError("Your account has been suspended by an administrator. Please contact support.");
+  }
+
   return session.user;
 }
 
