@@ -14,6 +14,8 @@ function sanitizeCsvField(field: unknown): string {
   return `"${str}"`;
 }
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const adminSession = await requireAdminSession();

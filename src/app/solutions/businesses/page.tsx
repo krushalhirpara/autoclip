@@ -1,11 +1,38 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap, Briefcase } from "lucide-react";
 import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
+import { BreadcrumbJsonLd, SoftwareApplicationJsonLd } from "@/components/seo/JsonLd";
+
+export const metadata: Metadata = {
+  title: "AI Video Repurposing for Businesses & Marketing Teams | AutoClipp",
+  description:
+    "Convert corporate webinars, customer interviews, and product demos into high-converting social clips for LinkedIn, YouTube, and TikTok with AutoClipp.",
+  alternates: {
+    canonical: "/solutions/businesses",
+  },
+  openGraph: {
+    title: "AI Video Repurposing for Businesses & Brands | AutoClipp",
+    description: "Repurpose webinars and customer testimonials into high-impact vertical video clips.",
+    url: "https://www.autoclipp.com/solutions/businesses",
+  },
+};
+
+const breadcrumbs = [
+  { name: "Home", item: "https://www.autoclipp.com" },
+  { name: "Solutions", item: "https://www.autoclipp.com/get-started" },
+  { name: "For Businesses", item: "https://www.autoclipp.com/solutions/businesses" },
+];
 
 export default function Page() {
   return (
     <main className="min-h-screen bg-[#F8F9FC] pb-24 pt-24 selection:bg-[#7C5CFC]/20 dark:bg-[#0A0A0C] overflow-hidden">
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <SoftwareApplicationJsonLd
+        name="AutoClipp for Enterprise & Business"
+        description="B2B webinar and demo video repurposing tool for marketing and growth teams."
+      />
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-[#7C5CFC]/10 blur-[120px] dark:bg-[#7C5CFC]/15" />
       <div className="hero-grid-pattern pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-50" />
 

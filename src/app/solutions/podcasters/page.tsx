@@ -1,11 +1,38 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap, Mic } from "lucide-react";
 import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
+import { BreadcrumbJsonLd, SoftwareApplicationJsonLd } from "@/components/seo/JsonLd";
+
+export const metadata: Metadata = {
+  title: "AI Podcast Clip Maker – Turn Audio & Video Podcasts into Shorts",
+  description:
+    "Transform 1-hour podcast episodes into dozens of high-performing TikToks, Reels, and YouTube Shorts. Automated speech transcription, speaker framing, and viral moment detection.",
+  alternates: {
+    canonical: "/solutions/podcasters",
+  },
+  openGraph: {
+    title: "AI Podcast Clip Maker & Shorts Generator | AutoClipp",
+    description: "Repurpose long video podcasts into viral vertical clips automatically.",
+    url: "https://www.autoclipp.com/solutions/podcasters",
+  },
+};
+
+const breadcrumbs = [
+  { name: "Home", item: "https://www.autoclipp.com" },
+  { name: "Solutions", item: "https://www.autoclipp.com/get-started" },
+  { name: "For Podcasters", item: "https://www.autoclipp.com/solutions/podcasters" },
+];
 
 export default function Page() {
   return (
     <main className="min-h-screen bg-[#F8F9FC] pb-24 pt-24 selection:bg-[#7C5CFC]/20 dark:bg-[#0A0A0C] overflow-hidden">
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <SoftwareApplicationJsonLd
+        name="AutoClipp for Podcasters"
+        description="Podcast repurposing engine that turns full-length episodes into engaging vertical clips."
+      />
       {/* Background Glows */}
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-[#7C5CFC]/10 blur-[120px] dark:bg-[#7C5CFC]/15" />
       <div className="hero-grid-pattern pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-50" />

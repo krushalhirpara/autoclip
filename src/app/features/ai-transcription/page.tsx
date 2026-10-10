@@ -18,15 +18,36 @@ import {
 } from "lucide-react";
 import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
 
+import { BreadcrumbJsonLd, SoftwareApplicationJsonLd } from "@/components/seo/JsonLd";
+
 export const metadata: Metadata = {
-  title: "AI Speech Transcription | AutoClipp",
+  title: "AI Video Transcription – 99% Accurate Whisper Subtitles",
   description:
-    "Generate 99% accurate word-by-word video transcripts with precise millisecond timestamps using OpenAI Whisper speech models.",
+    "Generate accurate word-by-word transcripts with millisecond-level timestamps using Whisper speech-to-text. Supports 50+ languages with automatic punctuation.",
+  alternates: {
+    canonical: "/features/ai-transcription",
+  },
+  openGraph: {
+    title: "AI Video Transcription – Accurate Whisper Subtitles | AutoClipp",
+    description: "Generate 99% accurate word-by-word transcripts with millisecond timestamps.",
+    url: "https://www.autoclipp.com/features/ai-transcription",
+  },
 };
+
+const breadcrumbs = [
+  { name: "Home", item: "https://www.autoclipp.com" },
+  { name: "Features", item: "https://www.autoclipp.com/get-started" },
+  { name: "AI Transcription", item: "https://www.autoclipp.com/features/ai-transcription" },
+];
 
 export default function AITranscriptionPage() {
   return (
     <main className="min-h-screen bg-[#F8F9FC] pb-24 pt-20 selection:bg-[#7C5CFC]/20 dark:bg-[#0A0A0C] overflow-hidden">
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <SoftwareApplicationJsonLd
+        name="AutoClipp AI Video Transcription"
+        description="High-accuracy AI speech-to-text and video transcription engine."
+      />
       {/* Background Glows */}
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-[#7C5CFC]/10 blur-[120px] dark:bg-[#7C5CFC]/15" />
       <div className="hero-grid-pattern pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-50" />

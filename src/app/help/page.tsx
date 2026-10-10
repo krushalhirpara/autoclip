@@ -1,13 +1,36 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap, HelpCircle } from "lucide-react";
 import { VideoThumbnail } from "@/components/media/VideoThumbnail";
 import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+
+export const metadata: Metadata = {
+  title: "Help Center & Support – AutoClipp FAQ",
+  description:
+    "Get help with AutoClipp. Find answers to common questions regarding video uploads, credit billing, export resolution, and subtitle customization.",
+  alternates: {
+    canonical: "/help",
+  },
+  openGraph: {
+    title: "AutoClipp Help Center & Support",
+    description: "Find guides and troubleshooting answers for AutoClipp video clipping SaaS.",
+    url: "https://www.autoclipp.com/help",
+  },
+};
+
+const breadcrumbs = [
+  { name: "Home", item: "https://www.autoclipp.com" },
+  { name: "Resources", item: "https://www.autoclipp.com/get-started" },
+  { name: "Help Center", item: "https://www.autoclipp.com/help" },
+];
 
 export default function Page() {
   return (
     <main className="min-h-screen bg-[#F8F9FC] pb-24 pt-24 selection:bg-[#7C5CFC]/20 dark:bg-[#0A0A0C] overflow-hidden">
+      <BreadcrumbJsonLd items={breadcrumbs} />
       {/* Background Glows */}
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-[#7C5CFC]/10 blur-[120px] dark:bg-[#7C5CFC]/15" />
       <div className="hero-grid-pattern pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-50" />

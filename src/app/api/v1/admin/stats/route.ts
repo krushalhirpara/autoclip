@@ -3,6 +3,8 @@ import { requireAdminSession } from "@/server/auth/admin-auth";
 import { prisma } from "@/server/db/prisma";
 import { PaymentStatus } from "@prisma/client";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     await requireAdminSession();

@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 export const metadata = {
   title: "Terms of Service | AutoClipp",
   description: "Read the Terms of Service governing your use of AutoClipp video clipping SaaS platform.",
+  alternates: {
+    canonical: "/terms",
+  },
 };
 
 export default function TermsOfServicePage() {

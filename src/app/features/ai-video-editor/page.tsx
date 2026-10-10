@@ -1,11 +1,38 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap, Sliders } from "lucide-react";
 import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
+import { BreadcrumbJsonLd, SoftwareApplicationJsonLd } from "@/components/seo/JsonLd";
+
+export const metadata: Metadata = {
+  title: "AI Video Editor – Cloud-Based Vertical Video Studio",
+  description:
+    "Edit, refine, and polish AI-generated clips with AutoClipp's online video editor. Adjust trim points, captions, aspect ratio, and visual overlays seamlessly.",
+  alternates: {
+    canonical: "/features/ai-video-editor",
+  },
+  openGraph: {
+    title: "AI Video Editor – Online Vertical Video Studio | AutoClipp",
+    description: "Cloud-based video editing studio for fast vertical video clip refinement.",
+    url: "https://www.autoclipp.com/features/ai-video-editor",
+  },
+};
+
+const breadcrumbs = [
+  { name: "Home", item: "https://www.autoclipp.com" },
+  { name: "Features", item: "https://www.autoclipp.com/get-started" },
+  { name: "AI Video Editor", item: "https://www.autoclipp.com/features/ai-video-editor" },
+];
 
 export default function Page() {
   return (
     <main className="min-h-screen bg-[#F8F9FC] pb-24 pt-24 selection:bg-[#7C5CFC]/20 dark:bg-[#0A0A0C] overflow-hidden">
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <SoftwareApplicationJsonLd
+        name="AutoClipp AI Video Editor"
+        description="Browser-based video editor for vertical clip customization and fine-tuning."
+      />
       {/* Background Glows */}
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-[#7C5CFC]/10 blur-[120px] dark:bg-[#7C5CFC]/15" />
       <div className="hero-grid-pattern pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-50" />

@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 export const metadata = {
   title: "DMCA & Copyright Policy | AutoClipp",
   description: "Learn how AutoClipp handles copyright protection, infringement claims, and DMCA notices.",
+  alternates: {
+    canonical: "/dmca",
+  },
 };
 
 export default function DmcaPage() {

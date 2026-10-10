@@ -1,11 +1,38 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap, Video } from "lucide-react";
 import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
+import { BreadcrumbJsonLd, SoftwareApplicationJsonLd } from "@/components/seo/JsonLd";
+
+export const metadata: Metadata = {
+  title: "YouTube Shorts Generator – Convert Long YouTube Videos to Shorts",
+  description:
+    "Turn long YouTube videos into viral YouTube Shorts with AI clipping, automated subtitle animations, and 9:16 vertical smart crop.",
+  alternates: {
+    canonical: "/solutions/youtubers",
+  },
+  openGraph: {
+    title: "YouTube Shorts Generator & Video Repurposing | AutoClipp",
+    description: "Convert long-form YouTube videos into high-performing YouTube Shorts in seconds.",
+    url: "https://www.autoclipp.com/solutions/youtubers",
+  },
+};
+
+const breadcrumbs = [
+  { name: "Home", item: "https://www.autoclipp.com" },
+  { name: "Solutions", item: "https://www.autoclipp.com/get-started" },
+  { name: "For YouTubers", item: "https://www.autoclipp.com/solutions/youtubers" },
+];
 
 export default function Page() {
   return (
     <main className="min-h-screen bg-[#F8F9FC] pb-24 pt-24 selection:bg-[#7C5CFC]/20 dark:bg-[#0A0A0C] overflow-hidden">
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <SoftwareApplicationJsonLd
+        name="AutoClipp for YouTubers"
+        description="YouTube video to vertical Shorts repurposing software."
+      />
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-[#7C5CFC]/10 blur-[120px] dark:bg-[#7C5CFC]/15" />
       <div className="hero-grid-pattern pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-50" />
 

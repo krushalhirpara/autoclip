@@ -15,15 +15,36 @@ import {
 } from "lucide-react";
 import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
 
+import { BreadcrumbJsonLd, SoftwareApplicationJsonLd } from "@/components/seo/JsonLd";
+
 export const metadata: Metadata = {
-  title: "Algorithmic Virality Scoring | AutoClipp",
+  title: "AI Virality Scoring (0–100) – Predict Clip Engagement",
   description:
-    "Evaluate video clips against a multi-factor virality score (0-100) assessing hook velocity, speech cadence, and retention.",
+    "Evaluate video clips with AutoClipp's proprietary virality scoring model (0-100). Analyzes hook intensity, speech cadence, emotional inflection, and retention velocity.",
+  alternates: {
+    canonical: "/features/ai-clip-scoring",
+  },
+  openGraph: {
+    title: "AI Virality Scoring – Predict Clip Engagement | AutoClipp",
+    description: "Multi-factor virality scoring model assessing hook velocity, speech cadence, and retention.",
+    url: "https://www.autoclipp.com/features/ai-clip-scoring",
+  },
 };
+
+const breadcrumbs = [
+  { name: "Home", item: "https://www.autoclipp.com" },
+  { name: "Features", item: "https://www.autoclipp.com/get-started" },
+  { name: "AI Clip Scoring", item: "https://www.autoclipp.com/features/ai-clip-scoring" },
+];
 
 export default function AIClipScoringPage() {
   return (
     <main className="min-h-screen bg-[#F8F9FC] pb-24 pt-20 selection:bg-[#7C5CFC]/20 dark:bg-[#0A0A0C] overflow-hidden">
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <SoftwareApplicationJsonLd
+        name="AutoClipp AI Virality Scoring"
+        description="Predictive engagement and virality scoring algorithm for short-form video clips."
+      />
       {/* Background Glows */}
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-[#7C5CFC]/10 blur-[120px] dark:bg-[#7C5CFC]/15" />
       <div className="hero-grid-pattern pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-50" />

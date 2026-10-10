@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 export const metadata = {
   title: "Security & Data Protection | AutoClipp",
   description: "Detailed overview of AutoClipp's encryption standards, media isolation, and data retention policies.",
+  alternates: {
+    canonical: "/security",
+  },
 };
 
 export default function SecurityPage() {

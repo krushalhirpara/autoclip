@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 export const metadata = {
   title: "Refund & Cancellation Policy | AutoClipp",
   description: "Understand AutoClipp's refund terms, subscription cancellation policy, and credit replenishment guarantees.",
+  alternates: {
+    canonical: "/refund",
+  },
 };
 
 export default function RefundPolicyPage() {

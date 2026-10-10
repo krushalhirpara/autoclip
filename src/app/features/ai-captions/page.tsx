@@ -1,11 +1,38 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap } from "lucide-react";
 import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
+import { BreadcrumbJsonLd, SoftwareApplicationJsonLd } from "@/components/seo/JsonLd";
+
+export const metadata: Metadata = {
+  title: "AI Caption Generator – Animated Word-by-Word Subtitles",
+  description:
+    "Add dynamic, high-converting animated captions to vertical video shorts automatically. Customize colors, fonts, emoji highlights, and karaoke styling with AutoClipp.",
+  alternates: {
+    canonical: "/features/ai-captions",
+  },
+  openGraph: {
+    title: "AI Caption Generator – Animated Subtitles | AutoClipp",
+    description: "Generate animated captions and styled subtitles automatically with 99% accuracy.",
+    url: "https://www.autoclipp.com/features/ai-captions",
+  },
+};
+
+const breadcrumbs = [
+  { name: "Home", item: "https://www.autoclipp.com" },
+  { name: "Features", item: "https://www.autoclipp.com/get-started" },
+  { name: "AI Captions", item: "https://www.autoclipp.com/features/ai-captions" },
+];
 
 export default function Page() {
   return (
     <main className="min-h-screen bg-[#F8F9FC] pb-24 pt-24 selection:bg-[#7C5CFC]/20 dark:bg-[#0A0A0C] overflow-hidden">
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <SoftwareApplicationJsonLd
+        name="AutoClipp AI Captions & Subtitles"
+        description="Automated animated word-by-word subtitle generator for vertical shorts."
+      />
       {/* Background Glows */}
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-[#7C5CFC]/10 blur-[120px] dark:bg-[#7C5CFC]/15" />
       <div className="hero-grid-pattern pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-50" />

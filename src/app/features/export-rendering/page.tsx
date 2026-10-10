@@ -7,15 +7,36 @@ import {
 } from "lucide-react";
 import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
 
+import { BreadcrumbJsonLd, SoftwareApplicationJsonLd } from "@/components/seo/JsonLd";
+
 export const metadata: Metadata = {
-  title: "High-Speed Export & Rendering | AutoClipp",
+  title: "Cloud Video Export & Fast Rendering – 1080p / 4K MP4",
   description:
-    "Render high-bitrate MP4 vertical videos in 720p, 1080p, and 4K with burnt-in animated captions using our distributed BullMQ FFmpeg queue.",
+    "Render high-bitrate vertical video shorts with burnt-in animated captions and overlays using AutoClipp's high-speed distributed cloud rendering engine.",
+  alternates: {
+    canonical: "/features/export-rendering",
+  },
+  openGraph: {
+    title: "Cloud Video Export & Rendering (1080p/4K) | AutoClipp",
+    description: "Export high-resolution vertical video shorts in seconds with hardware-accelerated rendering.",
+    url: "https://www.autoclipp.com/features/export-rendering",
+  },
 };
+
+const breadcrumbs = [
+  { name: "Home", item: "https://www.autoclipp.com" },
+  { name: "Features", item: "https://www.autoclipp.com/get-started" },
+  { name: "Export & Rendering", item: "https://www.autoclipp.com/features/export-rendering" },
+];
 
 export default function ExportRenderingPage() {
   return (
     <main className="min-h-screen bg-[#F8F9FC] pb-24 pt-20 selection:bg-[#7C5CFC]/20 dark:bg-[#0A0A0C] overflow-hidden">
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <SoftwareApplicationJsonLd
+        name="AutoClipp Cloud Video Exporter"
+        description="High-speed distributed cloud video rendering pipeline for 1080p and 4K vertical clips."
+      />
       {/* Background Glows */}
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-[#7C5CFC]/10 blur-[120px] dark:bg-[#7C5CFC]/15" />
       <div className="hero-grid-pattern pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-50" />

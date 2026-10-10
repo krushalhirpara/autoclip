@@ -10,6 +10,8 @@ import {
 } from "@/server/auth/admin-auth";
 import { prisma } from "@/server/db/prisma";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   try {
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || req.headers.get("x-real-ip") || "127.0.0.1";

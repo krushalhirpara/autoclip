@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 export const metadata = {
   title: "Cookie Policy | AutoClipp",
   description: "Learn about how AutoClipp uses cookies and similar storage technologies.",
+  alternates: {
+    canonical: "/cookies",
+  },
 };
 
 export default function CookiePolicyPage() {

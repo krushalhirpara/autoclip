@@ -1,11 +1,38 @@
 import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, ChevronRight, Star, Zap, Crop } from "lucide-react";
 import { SmartCtaButton } from "@/components/marketing/SmartCtaButton";
+import { BreadcrumbJsonLd, SoftwareApplicationJsonLd } from "@/components/seo/JsonLd";
+
+export const metadata: Metadata = {
+  title: "Smart 9:16 Reframe – AI Speaker Tracking & Auto Crop",
+  description:
+    "Automatically convert landscape 16:9 videos into perfectly framed 9:16 vertical shorts. Intelligent facial recognition and speaker tracking keep the subject centered.",
+  alternates: {
+    canonical: "/features/smart-reframe",
+  },
+  openGraph: {
+    title: "Smart 9:16 Vertical Video Reframe | AutoClipp",
+    description: "Automatic AI speaker tracking and dynamic 9:16 crop for vertical social video platforms.",
+    url: "https://www.autoclipp.com/features/smart-reframe",
+  },
+};
+
+const breadcrumbs = [
+  { name: "Home", item: "https://www.autoclipp.com" },
+  { name: "Features", item: "https://www.autoclipp.com/get-started" },
+  { name: "Smart Reframe", item: "https://www.autoclipp.com/features/smart-reframe" },
+];
 
 export default function Page() {
   return (
     <main className="min-h-screen bg-[#F8F9FC] pb-24 pt-24 selection:bg-[#7C5CFC]/20 dark:bg-[#0A0A0C] overflow-hidden">
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <SoftwareApplicationJsonLd
+        name="AutoClipp Smart 9:16 Reframe"
+        description="Automated speaker tracking and 9:16 vertical crop tool for TikTok and Shorts."
+      />
       {/* Background Glows */}
       <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-full max-w-4xl -translate-x-1/2 rounded-full bg-[#7C5CFC]/10 blur-[120px] dark:bg-[#7C5CFC]/15" />
       <div className="hero-grid-pattern pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-50" />

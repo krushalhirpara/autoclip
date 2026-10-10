@@ -6,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 export const metadata = {
   title: "Privacy Policy | AutoClipp",
   description: "Learn how AutoClipp collects, processes, and protects your video media, transcripts, and account data.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 export default function PrivacyPolicyPage() {

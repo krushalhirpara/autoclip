@@ -28,11 +28,26 @@ import { InteractiveProductTour } from "@/components/marketing/InteractiveProduc
 import { FaqSection } from "@/components/marketing/FaqSection";
 import { Badge } from "@/components/ui/badge";
 
+import { BreadcrumbJsonLd, SoftwareApplicationJsonLd } from "@/components/seo/JsonLd";
+
 export const metadata: Metadata = {
-  title: "Get Started | AutoClipp - AI Video Clipping Platform",
+  title: "Get Started – Features & Video Repurposing Tools",
   description:
-    "Explore all AutoClipp features and start creating viral 9:16 shorts from long videos. AI transcription, smart reframing, animated captions, and moment scoring.",
+    "Explore all AutoClipp features and start creating viral 9:16 shorts from long videos. AI transcription, smart reframing, animated captions, and moment virality scoring.",
+  alternates: {
+    canonical: "/get-started",
+  },
+  openGraph: {
+    title: "Get Started with AutoClipp – AI Video Clipping Tools",
+    description: "Explore all tools and start repurposing your long videos into viral vertical clips.",
+    url: "https://www.autoclipp.com/get-started",
+  },
 };
+
+const breadcrumbs = [
+  { name: "Home", item: "https://www.autoclipp.com" },
+  { name: "Get Started", item: "https://www.autoclipp.com/get-started" },
+];
 
 interface FeatureCardData {
   id: string;
@@ -49,6 +64,19 @@ interface FeatureCardData {
 }
 
 export default function GetStartedPage() {
+  return (
+    <>
+      <BreadcrumbJsonLd items={breadcrumbs} />
+      <SoftwareApplicationJsonLd
+        name="AutoClipp Feature Suite"
+        description="Comprehensive AI video clipping, subtitle animation, and vertical content repurposing suite."
+      />
+      <GetStartedContent />
+    </>
+  );
+}
+
+function GetStartedContent() {
   const features: FeatureCardData[] = [
     {
       id: "ai-clipping",

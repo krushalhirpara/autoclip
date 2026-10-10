@@ -28,10 +28,35 @@ import { DemoAutoPosting } from "@/components/marketing/DemoAutoPosting";
 import { PipelineSection } from "@/components/marketing/PipelineSection";
 import { ArchitectureSection } from "@/components/marketing/ArchitectureSection";
 import { FaqSection } from "@/components/marketing/FaqSection";
+import { FaqJsonLd } from "@/components/seo/JsonLd";
+
+const homeFaqs = [
+  {
+    question: "How accurate is the AI moment detection?",
+    answer:
+      "Our system uses fine-tuned AI models that analyze transcript semantics, emotional intensity, and narrative arcs to identify hooks that perform significantly better than manual clipping.",
+  },
+  {
+    question: "Do you support languages other than English?",
+    answer:
+      "Yes, our Whisper-based transcription engine supports over 50 languages with automatic subtitle generation.",
+  },
+  {
+    question: "What happens if I run out of minutes?",
+    answer:
+      "You can purchase credit top-ups without having to upgrade your base subscription tier. Credits never expire on active accounts.",
+  },
+  {
+    question: "Can I customize the subtitle styles?",
+    answer:
+      "Absolutely. You can choose font families, adjust colors, positioning, and apply dynamic animated presets (word-by-word highlight, pop, or karaoke style).",
+  },
+];
 
 export default function HomePage() {
   return (
     <main className="relative overflow-hidden px-6 pb-24 pt-16 sm:pt-20">
+      <FaqJsonLd faqs={homeFaqs} />
       {/* Technical CSS Grid Background Pattern */}
       <div className="hero-grid-pattern pointer-events-none absolute inset-0 -z-10 h-[600px] w-full" />
 
