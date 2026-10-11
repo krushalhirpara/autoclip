@@ -3,7 +3,7 @@ import { Video, FileText, Cpu, Sliders } from 'lucide-react';
 
 export function PipelineSection() {
   return (
-    <section id="features" className="mx-auto mt-28 max-w-7xl px-4 sm:px-6">
+    <section id="features" className="mx-auto mt-16 sm:mt-24 lg:mt-28 max-w-7xl px-4 sm:px-6">
       <div className="text-center">
         <h2 className="text-2xl font-bold tracking-tight text-[#111118] dark:text-white sm:text-3xl">
           Engineered Asynchronous Processing Pipeline
@@ -13,7 +13,7 @@ export function PipelineSection() {
         </p>
       </div>
 
-      <div className="relative mt-20">
+      <div className="relative mt-10 sm:mt-16 lg:mt-20">
         {/* Connection Lines */}
         <div className="absolute left-[50%] top-0 bottom-0 w-[1px] bg-gradient-to-b from-transparent via-[#E8E7F0] to-transparent lg:bottom-auto lg:left-[10%] lg:right-[10%] lg:top-[5.5rem] lg:h-[1px] lg:w-auto lg:bg-gradient-to-r dark:via-[#27272A]" />
         

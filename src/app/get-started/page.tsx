@@ -469,27 +469,27 @@ function GetStartedContent() {
             <span>AI Video Intelligence & Feature Catalog</span>
           </div>
 
-          <h1 className="mt-8 text-4xl font-extrabold tracking-tight text-[#111118] dark:text-white sm:text-6xl lg:text-7xl">
-            Everything You Need to <br />
-            <span className="bg-gradient-to-r from-[#111118] via-[#7C5CFC] to-[#9B7CFF] bg-clip-text text-transparent dark:from-white dark:via-white dark:to-[#A78BFA]">
+          <h1 className="mt-6 sm:mt-8 text-[32px] min-[360px]:text-[36px] min-[390px]:text-[40px] sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#111118] dark:text-white leading-[1.14] sm:leading-[1.1] max-w-4xl mx-auto [text-wrap:balance]">
+            Everything You Need to{" "}
+            <span className="bg-gradient-to-r from-[#111118] via-[#5B36EC] to-[#7C5CFC] bg-clip-text text-transparent dark:from-white dark:via-purple-100 dark:to-[#A78BFA]">
               Create Viral Shorts
             </span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-base text-[#6B6B78] dark:text-[#A1A1AA] sm:text-lg">
+          <p className="mx-auto mt-4 sm:mt-6 max-w-2xl px-2 sm:px-0 text-sm sm:text-base md:text-lg text-[#52525E] dark:text-[#A1A1AA] leading-relaxed sm:leading-[1.7]">
             Turn long-form podcasts, interviews, webinars, and YouTube videos into high-converting
             vertical shorts in seconds. Powered by speech transcription, viral moment scoring,
             smart 9:16 speaker reframing, and dynamic subtitles.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <SmartCtaButton variant="primary" size="lg">
+          <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto">
+            <SmartCtaButton variant="primary" size="lg" className="w-full sm:w-auto min-h-[44px]">
               Start Creating
             </SmartCtaButton>
 
             <Link
               href="#features-grid"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-[#E8E7F0] bg-white px-7 py-3.5 text-base font-semibold text-[#111118] shadow-sm transition-all hover:bg-[#F4F3FF] hover:border-[#7C5CFC]/30 dark:border-[#27272A] dark:bg-[#1B1B1F] dark:text-white dark:hover:bg-[#222227]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-[#E8E7F0] bg-white px-7 py-3.5 text-base font-semibold text-[#111118] shadow-sm transition-all hover:bg-[#F4F3FF] hover:border-[#7C5CFC]/30 dark:border-[#27272A] dark:bg-[#1B1B1F] dark:text-white dark:hover:bg-[#222227] min-h-[44px]"
             >
               <span>Explore Features</span>
               <ArrowRight className="h-4 w-4" />
@@ -741,26 +741,26 @@ function GetStartedContent() {
         {/* =========================================================================
             7. FINAL CALL TO ACTION
            ========================================================================= */}
-        <section className="mt-32 mb-16">
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#111118] via-[#1A1828] to-[#121218] px-6 py-20 text-center shadow-2xl dark:from-[#0A0A0C] dark:via-[#14141C] dark:to-[#0A0A0C]">
+        <section className="mt-16 sm:mt-24 lg:mt-32 mb-12 sm:mb-16">
+          <div className="relative overflow-hidden rounded-3xl sm:rounded-[2.5rem] bg-gradient-to-br from-[#111118] via-[#1A1828] to-[#121218] px-4 sm:px-6 py-12 sm:py-20 text-center shadow-2xl dark:from-[#0A0A0C] dark:via-[#14141C] dark:to-[#0A0A0C]">
             <div className="pointer-events-none absolute inset-0 bg-white/5 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] opacity-10" />
             <div className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-48 w-3/4 -translate-x-1/2 rounded-full bg-[#7C5CFC]/30 blur-[80px]" />
 
-            <h2 className="relative z-10 text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+            <h2 className="relative z-10 text-2xl min-[360px]:text-3xl font-extrabold tracking-tight text-white sm:text-5xl [text-wrap:balance]">
               Ready to create your first clip?
             </h2>
-            <p className="relative z-10 mx-auto mt-6 max-w-xl text-base text-[#A1A1AA] sm:text-lg">
+            <p className="relative z-10 mx-auto mt-4 sm:mt-6 max-w-xl text-sm sm:text-lg text-[#A1A1AA]">
               Join creators, podcasters, and media agencies scaling their short-form content output with AutoClipp.
             </p>
 
-            <div className="relative z-10 mt-10 flex flex-wrap items-center justify-center gap-4">
-              <SmartCtaButton variant="white" size="lg">
+            <div className="relative z-10 mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-xs sm:max-w-none mx-auto">
+              <SmartCtaButton variant="white" size="lg" className="w-full sm:w-auto min-h-[44px]">
                 Start Free Project
               </SmartCtaButton>
 
               <Link
                 href="/pricing"
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-3.5 text-base font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+                className="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 sm:px-8 py-3.5 text-sm sm:text-base font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20 min-h-[44px]"
               >
                 <span>View Pricing & Passes</span>
               </Link>

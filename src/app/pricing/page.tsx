@@ -61,11 +61,11 @@ export default function PricingPage() {
         </p>
 
         {/* Billing Interval Switcher */}
-        <div className="mt-10 flex flex-col items-center justify-center gap-3">
-          <div className="inline-flex rounded-2xl border border-gray-200 bg-white p-1.5 shadow-sm dark:border-white/10 dark:bg-[#141416]">
+        <div className="mt-8 sm:mt-10 flex flex-col items-center justify-center gap-3">
+          <div className="flex flex-wrap sm:inline-flex justify-center max-w-full rounded-2xl border border-gray-200 bg-white p-1.5 shadow-sm dark:border-white/10 dark:bg-[#141416] gap-1 sm:gap-0">
             <button
               onClick={() => setBillingInterval("month")}
-              className={`rounded-xl px-5 py-2 text-xs sm:text-sm font-semibold transition-all ${
+              className={`rounded-xl px-3.5 sm:px-5 py-2 text-xs sm:text-sm font-semibold transition-all ${
                 billingInterval === "month"
                   ? "bg-[#7C5CFC] text-white shadow-[0_2px_10px_rgba(124,92,252,0.3)]"
                   : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
@@ -75,7 +75,7 @@ export default function PricingPage() {
             </button>
             <button
               onClick={() => setBillingInterval("year")}
-              className={`relative rounded-xl px-5 py-2 text-xs sm:text-sm font-semibold transition-all ${
+              className={`relative rounded-xl px-3.5 sm:px-5 py-2 text-xs sm:text-sm font-semibold transition-all ${
                 billingInterval === "year"
                   ? "bg-[#7C5CFC] text-white shadow-[0_2px_10px_rgba(124,92,252,0.3)]"
                   : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
@@ -88,7 +88,7 @@ export default function PricingPage() {
             </button>
             <button
               onClick={() => setBillingInterval("one_time")}
-              className={`rounded-xl px-5 py-2 text-xs sm:text-sm font-semibold transition-all ${
+              className={`rounded-xl px-3.5 sm:px-5 py-2 text-xs sm:text-sm font-semibold transition-all ${
                 billingInterval === "one_time"
                   ? "bg-[#7C5CFC] text-white shadow-[0_2px_10px_rgba(124,92,252,0.3)]"
                   : "text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
@@ -98,8 +98,8 @@ export default function PricingPage() {
             </button>
           </div>
 
-          <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-            <ShieldCheck className="h-4 w-4 text-emerald-500" />
+          <div className="flex items-center justify-center gap-2 text-xs text-gray-500 dark:text-gray-400 max-w-xl text-center px-2">
+            <ShieldCheck className="h-4 w-4 text-emerald-500 shrink-0" />
             <span>
               {subscriptionsEnabled
                 ? "PayPal Recurring Subscriptions Active • Automatic Renewal • Cancel Anytime"

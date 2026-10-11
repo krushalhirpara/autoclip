@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { Video, Image, MessageCircle, CheckCircle2, Loader2, CalendarClock, ArrowDown } from "lucide-react";
+import { Video, Image as ImageIcon, MessageCircle, CheckCircle2, Loader2, CalendarClock, ArrowDown } from "lucide-react";
 import { VideoThumbnail } from "../media/VideoThumbnail";
 
 export function DemoAutoPosting() {
@@ -61,54 +61,54 @@ export function DemoAutoPosting() {
   };
 
   return (
-    <div ref={ref} className="w-full max-w-5xl mx-auto rounded-3xl bg-[#F8F9FC] dark:bg-[#0A0A0B] border border-[#E8E7F0] dark:border-[#27272A] p-8 md:p-12 shadow-2xl">
-      <div className="text-center mb-12">
-        <h3 className="text-3xl md:text-4xl font-extrabold tracking-tight text-[#111118] dark:text-white">
+    <div ref={ref} className="w-full max-w-5xl mx-auto rounded-3xl bg-[#F8F9FC] dark:bg-[#0A0A0B] border border-[#E8E7F0] dark:border-[#27272A] p-4 sm:p-8 md:p-12 shadow-2xl">
+      <div className="text-center mb-8 sm:mb-12">
+        <h3 className="text-2xl min-[360px]:text-3xl md:text-4xl font-extrabold tracking-tight text-[#111118] dark:text-white">
           Your content, on autopilot.
         </h3>
-        <p className="mt-4 text-[#6B6B78] dark:text-[#A1A1AA] text-lg">
+        <p className="mt-2 sm:mt-4 text-[#6B6B78] dark:text-[#A1A1AA] text-base sm:text-lg">
           Create once. Publish everywhere.
         </p>
       </div>
 
       {/* Workflow Diagram */}
-      <div className="flex flex-col items-center mb-12">
+      <div className="flex flex-col items-center mb-8 sm:mb-12">
         
-        <div className="flex items-center justify-between w-full max-w-2xl">
+        <div className="flex items-center justify-between w-full max-w-2xl px-1">
           <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 rounded-full bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-3">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-red-100 dark:bg-red-500/10 flex items-center justify-center mb-2 sm:mb-3">
               <VideoThumbnail 
                 orientation="portrait" 
                 duration="14:20" 
                 label="" 
-                className="w-10 h-10 rounded-full" 
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-full" 
               />
             </div>
-            <p className="text-xs font-bold text-[#111118] dark:text-white uppercase">SOURCE VIDEO</p>
-            <p className="text-[10px] text-[#6B6B78] dark:text-[#A1A1AA] mt-1">New upload detected</p>
+            <p className="text-[10px] sm:text-xs font-bold text-[#111118] dark:text-white uppercase">SOURCE VIDEO</p>
+            <p className="text-[9px] sm:text-[10px] text-[#6B6B78] dark:text-[#A1A1AA] mt-0.5 sm:mt-1 hidden min-[360px]:block">New upload detected</p>
           </div>
 
-          <div className="flex-1 h-px bg-dashed border-t-2 border-dashed border-[#DCD9E8] dark:border-[#27272A] mx-4 relative">
-            <ArrowDown className="w-4 h-4 text-[#A1A1AA] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90" />
-          </div>
-
-          <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 rounded-full bg-[#7C5CFC]/10 flex items-center justify-center mb-3 shadow-[0_0_15px_rgba(124,92,252,0.3)]">
-              <Loader2 className="w-8 h-8 text-[#7C5CFC] animate-spin" />
-            </div>
-            <p className="text-xs font-bold text-[#111118] dark:text-white uppercase">AI PROCESSING</p>
-            <p className="text-[10px] text-[#7C5CFC] font-semibold mt-1">8 clips generated</p>
-          </div>
-
-          <div className="flex-1 h-px bg-dashed border-t-2 border-dashed border-[#DCD9E8] dark:border-[#27272A] mx-4 relative">
-            <ArrowDown className="w-4 h-4 text-[#A1A1AA] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90" />
+          <div className="flex-1 h-px bg-dashed border-t-2 border-dashed border-[#DCD9E8] dark:border-[#27272A] mx-2 sm:mx-4 relative">
+            <ArrowDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#A1A1AA] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90" />
           </div>
 
           <div className="flex flex-col items-center text-center">
-            <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center mb-3">
-              <CheckCircle2 className="w-8 h-8 text-emerald-600 dark:text-emerald-500" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#7C5CFC]/10 flex items-center justify-center mb-2 sm:mb-3 shadow-[0_0_15px_rgba(124,92,252,0.3)]">
+              <Loader2 className="w-6 h-6 sm:w-8 sm:h-8 text-[#7C5CFC] animate-spin" />
             </div>
-            <p className="text-xs font-bold text-[#111118] dark:text-white uppercase">READY TO PUBLISH</p>
+            <p className="text-[10px] sm:text-xs font-bold text-[#111118] dark:text-white uppercase">AI PROCESSING</p>
+            <p className="text-[9px] sm:text-[10px] text-[#7C5CFC] font-semibold mt-0.5 sm:mt-1 hidden min-[360px]:block">8 clips generated</p>
+          </div>
+
+          <div className="flex-1 h-px bg-dashed border-t-2 border-dashed border-[#DCD9E8] dark:border-[#27272A] mx-2 sm:mx-4 relative">
+            <ArrowDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#A1A1AA] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-90" />
+          </div>
+
+          <div className="flex flex-col items-center text-center">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-emerald-100 dark:bg-emerald-500/10 flex items-center justify-center mb-2 sm:mb-3">
+              <CheckCircle2 className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600 dark:text-emerald-500" />
+            </div>
+            <p className="text-[10px] sm:text-xs font-bold text-[#111118] dark:text-white uppercase">READY TO PUBLISH</p>
           </div>
         </div>
 
@@ -151,7 +151,7 @@ export function DemoAutoPosting() {
         <div className={`transition-all duration-700 transform ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"} delay-200 bg-white dark:bg-[#141416] border border-[#E8E7F0] dark:border-[#27272A] rounded-2xl p-5 shadow-sm hover:shadow-md`}>
           <div className="flex justify-between items-start mb-4">
             <div className="flex items-center gap-2">
-              <Image className="w-5 h-5 text-pink-500" />
+              <ImageIcon className="w-5 h-5 text-pink-500" />
               <span className="font-bold text-[#111118] dark:text-white text-sm">Instagram Reels</span>
             </div>
             <span className={`flex items-center text-[10px] font-bold px-2 py-1 rounded border ${getStatusColor(status2)}`}>

@@ -27,13 +27,13 @@ export function Footer() {
   return (
     <footer className="border-t border-gray-200 dark:border-[#27272A] bg-white dark:bg-[#0E0E11] text-gray-600 dark:text-[#A1A1AA] transition-colors">
       {/* Top Banner / Trust Bar */}
-      <div className="border-b border-gray-200 dark:border-[#1F1F24] bg-gray-50 dark:bg-[#141417]/60 py-4 px-6">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 text-xs">
+      <div className="border-b border-gray-200 dark:border-[#1F1F24] bg-gray-50 dark:bg-[#141417]/60 py-3.5 sm:py-4 px-4 sm:px-6">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 sm:gap-4 text-xs">
           <div className="flex items-center space-x-2 text-gray-800 dark:text-white/90">
-            <ShieldCheck className="h-4 w-4 text-[#7C5CFC]" />
-            <span>Enterprise-grade data encryption (AES-256) & strict multi-tenant video isolation.</span>
+            <ShieldCheck className="h-4 w-4 text-[#7C5CFC] shrink-0" />
+            <span className="leading-snug">Enterprise-grade data encryption (AES-256) & strict multi-tenant video isolation.</span>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-wrap items-center gap-3 sm:space-x-4">
             <span className="flex items-center text-[#22C55E]">
               <span className="mr-1.5 inline-block h-2 w-2 rounded-full bg-[#22C55E] animate-pulse" />
               All Systems Operational (99.99% Uptime)
@@ -49,7 +49,7 @@ export function Footer() {
       </div>
 
       {/* Main Multi-Column Footer Content */}
-      <div className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5">
           {/* Brand & Mission */}
           <div className="lg:col-span-2 space-y-4">
@@ -175,7 +175,7 @@ export function Footer() {
       </div>
 
       {/* Bottom Legal / Copyright Bar */}
-      <div className="border-t border-gray-200 dark:border-[#1F1F24] bg-white dark:bg-[#0A0A0B] py-6 px-6">
+      <div className="border-t border-gray-200 dark:border-[#1F1F24] bg-white dark:bg-[#0A0A0B] py-5 sm:py-6 px-4 sm:px-6">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs sm:flex-row">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <span>© {new Date().getFullYear()} AutoClipp Inc. All rights reserved.</span>

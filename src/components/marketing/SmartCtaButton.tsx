@@ -39,9 +39,9 @@ export function SmartCtaButton({
     "inline-flex items-center justify-center font-semibold transition-all duration-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#7C5CFC] focus-visible:ring-offset-2 select-none cursor-pointer";
 
   const sizeStyles = {
-    sm: "px-4 py-2 text-xs rounded-full gap-1.5",
-    default: "px-6 py-2.5 text-sm rounded-full gap-2",
-    lg: "px-8 py-3.5 text-base rounded-full gap-2.5 shadow-lg",
+    sm: "px-4 py-2 text-xs rounded-full gap-1.5 min-h-[36px]",
+    default: "px-5 sm:px-6 py-2.5 text-sm rounded-full gap-2 min-h-[40px]",
+    lg: "px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base rounded-full gap-2 sm:gap-2.5 shadow-lg min-h-[44px]",
   };
 
   const variantStyles = {
