@@ -1,35 +1,52 @@
 "use client";
 
-import React, { useSyncExternalStore } from "react";
+import React, { useEffect, useState } from "react";
 import { Sun, Moon } from "lucide-react";
 
-function subscribe(callback: () => void) {
-  window.addEventListener("storage", callback);
-  return () => window.removeEventListener("storage", callback);
-}
-
-function getSnapshot() {
-  if (typeof window === "undefined") return "light";
-  return localStorage.getItem("autoclipp-theme") || "light";
-}
-
-function getServerSnapshot() {
-  return "light";
-}
-
 export function ThemeToggle() {
-  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains("dark");
+    setTheme(isDark ? "dark" : "light");
+    setMounted(true);
+
+    const handleStorage = () => {
+      const isDarkNow = document.documentElement.classList.contains("dark");
+      setTheme(isDarkNow ? "dark" : "light");
+    };
+
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
 
   const toggleTheme = () => {
-    const nextTheme = theme === "dark" ? "light" : "dark";
+    const isCurrentlyDark = document.documentElement.classList.contains("dark");
+    const nextTheme = isCurrentlyDark ? "light" : "dark";
+
     if (nextTheme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-    localStorage.setItem("autoclipp-theme", nextTheme);
-    window.dispatchEvent(new Event("storage"));
+
+    setTheme(nextTheme);
+    try {
+      localStorage.setItem("autoclipp-theme", nextTheme);
+      window.dispatchEvent(new Event("storage"));
+    } catch {
+      // Storage might be unavailable (e.g. private mode)
+    }
   };
+
+  if (!mounted) {
+    return (
+      <div className="fixed bottom-5 left-5 z-50">
+        <div className="h-11 w-11 rounded-full border border-[#E8E7F0] bg-white/90 shadow-[0_4px_20px_rgba(0,0,0,0.08)] backdrop-blur-md dark:border-white/15 dark:bg-[#141418]/90" />
+      </div>
+    );
+  }
 
   return (
     <div className="fixed bottom-5 left-5 z-50">

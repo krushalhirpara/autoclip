@@ -91,7 +91,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#7C5CFC",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#F8F9FC" },
+    { media: "(prefers-color-scheme: dark)", color: "#0A0A0C" },
+  ],
+  colorScheme: "light dark",
   width: "device-width",
   initialScale: 1,
 };
@@ -102,8 +106,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem('autoclipp-theme');var p=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(!s&&p)){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`,
+          }}
+        />
         <OrganizationAndWebsiteJsonLd />
         <SoftwareApplicationJsonLd />
       </head>
